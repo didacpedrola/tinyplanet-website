@@ -1,20 +1,18 @@
-### Tiny Planet — Website CMS config (Sveltia CMS / Decap-compatible)
+### Tiny Planet — Website CMS config (Sveltia CMS)
 ###
 ### This lets you edit every piece of website copy, in every language, from a
 ### simple web form at yourdomain.com/admin — no code editing needed.
 ###
-### SETUP STILL NEEDED (see Didac's notes / chat for full steps):
-###   1. Push this "Website" folder to your GitHub repo.
-###   2. Deploy that repo on Netlify.
-###   3. In Netlify: Site settings → Identity → Enable Identity, then
-###      Site settings → Identity → Services → Git Gateway → Enable.
-###   4. Invite yourself as a user in Netlify Identity, set a password.
-###   5. Visit yourdomain.com/admin, log in, and start editing.
-### Once that's done, this backend config below needs no changes — Git Gateway
-### automatically connects to whichever repo is deployed on the Netlify site.
+### AUTH: Netlify's old "Git Gateway" is no longer supported by Sveltia CMS,
+### so this connects straight to GitHub instead. The first time you open
+### /admin, click "Sign In with Token" — it walks you through generating a
+### GitHub personal access token scoped to just this repo (Contents:
+### read/write). Paste it in and you're logged in. No Netlify Identity setup
+### needed at all.
 
 backend:
-  name: git-gateway
+  name: github
+  repo: didacpedrola/tinyplanet-website
   branch: main
 
 # Where uploaded images (if you ever add any through the CMS) get stored.
