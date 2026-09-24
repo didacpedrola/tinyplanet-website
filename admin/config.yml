@@ -1,0 +1,210 @@
+### Tiny Planet — Website CMS config (Sveltia CMS / Decap-compatible)
+###
+### This lets you edit every piece of website copy, in every language, from a
+### simple web form at yourdomain.com/admin — no code editing needed.
+###
+### SETUP STILL NEEDED (see Didac's notes / chat for full steps):
+###   1. Push this "Website" folder to your GitHub repo.
+###   2. Deploy that repo on Netlify.
+###   3. In Netlify: Site settings → Identity → Enable Identity, then
+###      Site settings → Identity → Services → Git Gateway → Enable.
+###   4. Invite yourself as a user in Netlify Identity, set a password.
+###   5. Visit yourdomain.com/admin, log in, and start editing.
+### Once that's done, this backend config below needs no changes — Git Gateway
+### automatically connects to whichever repo is deployed on the Netlify site.
+
+backend:
+  name: git-gateway
+  branch: main
+
+# Where uploaded images (if you ever add any through the CMS) get stored.
+media_folder: "Website/images/uploads"
+public_folder: "/images/uploads"
+
+# Show a "these changes are live once saved" style workflow instead of
+# drafts/PRs — simplest option for a one-person team.
+publish_mode: simple
+
+locale: en
+
+collections:
+  - name: "translations"
+    label: "Website Text (all languages)"
+    files:
+      - name: "en"
+        label: "🇬🇧 English"
+        file: "Website/i18n/en.json"
+        fields: &translation_fields
+          # — Navigation —
+          - { label: "Nav: How it works", name: "nav_how", widget: "string" }
+          - { label: "Nav: Adventure Passports", name: "nav_books", widget: "string" }
+          - { label: "Nav: Our Story", name: "nav_about", widget: "string" }
+          - { label: "Nav: Shop Now (mobile menu button)", name: "nav_shop", widget: "string" }
+          - { label: "Nav: Cart button", name: "nav_cart", widget: "string" }
+
+          - { label: "Hero headline — line 1", name: "hero_h1a", widget: "string" }
+          - { label: "Hero headline — line 2 (highlighted)", name: "hero_h1b", widget: "string" }
+          - { label: "Hero subheading", name: "hero_sub", widget: "text" }
+          - { label: "Hero button 1", name: "hero_cta1", widget: "string" }
+          - { label: "Hero button 2", name: "hero_cta2", widget: "string" }
+          - { label: "\"From\" (price prefix)", name: "from_price", widget: "string" }
+          - { label: "Duration option: 1–2 weeks", name: "week_1_2", widget: "string" }
+          - { label: "Duration option: 3–4+ weeks", name: "week_3_4", widget: "string" }
+          - { label: "Duration field label", name: "duration_label", widget: "string" }
+          - { label: "Trust stat label: Countries", name: "trust_countries", widget: "string" }
+          - { label: "Trust stat label: Languages", name: "trust_langs", widget: "string" }
+          - { label: "Trust stat label: Ships worldwide", name: "trust_ships", widget: "string" }
+
+          # — Problem band —
+          - { label: "Problem paragraph (HTML allowed, e.g. <strong>)", name: "problem_text", widget: "text" }
+
+          # — How it works —
+          - { label: "\"How it works\" eyebrow label", name: "how_label", widget: "string" }
+          - { label: "\"How it works\" title (HTML <br> allowed)", name: "how_title", widget: "text" }
+          - { label: "\"How it works\" subtitle", name: "how_sub", widget: "text" }
+          - { label: "Step 1 — number label", name: "step1_num", widget: "string" }
+          - { label: "Step 1 — title", name: "step1_title", widget: "string" }
+          - { label: "Step 1 — description", name: "step1_desc", widget: "text" }
+          - { label: "Step 2 — number label", name: "step2_num", widget: "string" }
+          - { label: "Step 2 — title", name: "step2_title", widget: "string" }
+          - { label: "Step 2 — description", name: "step2_desc", widget: "text" }
+          - { label: "Step 3 — number label", name: "step3_num", widget: "string" }
+          - { label: "Step 3 — title", name: "step3_title", widget: "string" }
+          - { label: "Step 3 — description", name: "step3_desc", widget: "text" }
+
+          # — Photo-break quote —
+          - { label: "Quote text", name: "quote1", widget: "text" }
+          - { label: "Quote attribution", name: "quote1_attr", widget: "string" }
+
+          # — Features —
+          - { label: "\"What's inside\" eyebrow label", name: "feat_label", widget: "string" }
+          - { label: "\"What's inside\" title (HTML <br> allowed)", name: "feat_title", widget: "text" }
+          - { label: "\"What's inside\" subtitle", name: "feat_sub", widget: "text" }
+          - { label: "Feature 1 — title", name: "feat1_title", widget: "string" }
+          - { label: "Feature 1 — description", name: "feat1_desc", widget: "text" }
+          - { label: "Feature 2 — title", name: "feat2_title", widget: "string" }
+          - { label: "Feature 2 — description", name: "feat2_desc", widget: "text" }
+          - { label: "Feature 3 — title", name: "feat3_title", widget: "string" }
+          - { label: "Feature 3 — description", name: "feat3_desc", widget: "text" }
+          - { label: "Feature 4 — title", name: "feat4_title", widget: "string" }
+          - { label: "Feature 4 — description", name: "feat4_desc", widget: "text" }
+          - { label: "Feature 5 — title", name: "feat5_title", widget: "string" }
+          - { label: "Feature 5 — description", name: "feat5_desc", widget: "text" }
+          - { label: "Feature 6 — title", name: "feat6_title", widget: "string" }
+          - { label: "Feature 6 — description", name: "feat6_desc", widget: "text" }
+
+          # — Catalogue —
+          - { label: "Catalogue eyebrow label", name: "cat_label", widget: "string" }
+          - { label: "Catalogue title", name: "cat_title", widget: "string" }
+          - { label: "Search box placeholder", name: "cat_search", widget: "string" }
+          - { label: "Filter: All", name: "filter_all", widget: "string" }
+          - { label: "Filter: Europe", name: "filter_europe", widget: "string" }
+          - { label: "Filter: Asia", name: "filter_asia", widget: "string" }
+          - { label: "Filter: Americas", name: "filter_americas", widget: "string" }
+          - { label: "Filter: Africa", name: "filter_africa", widget: "string" }
+          - { label: "Filter: Oceania", name: "filter_oceania", widget: "string" }
+
+          # — Testimonials —
+          - { label: "Testimonials eyebrow label", name: "test_label", widget: "string" }
+          - { label: "Testimonials title", name: "test_title", widget: "string" }
+          - { label: "Testimonial 1", name: "t1", widget: "text" }
+          - { label: "Testimonial 2", name: "t2", widget: "text" }
+          - { label: "Testimonial 3", name: "t3", widget: "text" }
+
+          # — About / Our Story —
+          - { label: "About eyebrow label", name: "about_label", widget: "string" }
+          - { label: "About title — highlighted phrase", name: "about_em", widget: "string" }
+          - { label: "About paragraph 1", name: "about_p1", widget: "text" }
+          - { label: "About paragraph 2", name: "about_p2", widget: "text" }
+          - { label: "About floating stat caption", name: "about_float", widget: "string" }
+          - { label: "Value 1 — title", name: "val1_title", widget: "string" }
+          - { label: "Value 1 — description", name: "val1_desc", widget: "text" }
+          - { label: "Value 2 — title", name: "val2_title", widget: "string" }
+          - { label: "Value 2 — description", name: "val2_desc", widget: "text" }
+          - { label: "Value 3 — title", name: "val3_title", widget: "string" }
+          - { label: "Value 3 — description", name: "val3_desc", widget: "text" }
+          - { label: "About button", name: "about_cta", widget: "string" }
+
+          # — Newsletter —
+          - { label: "Newsletter eyebrow label", name: "nl_label", widget: "string" }
+          - { label: "Newsletter title", name: "nl_title", widget: "string" }
+          - { label: "Newsletter subtitle", name: "nl_sub", widget: "text" }
+          - { label: "Email field placeholder", name: "nl_email", widget: "string" }
+          - { label: "Subscribe button", name: "nl_btn", widget: "string" }
+          - { label: "Newsletter fine print", name: "nl_note", widget: "string" }
+
+          # — Final CTA band —
+          - { label: "CTA title (HTML <br> allowed)", name: "cta_title", widget: "text" }
+          - { label: "CTA subtitle", name: "cta_sub", widget: "string" }
+          - { label: "CTA button 1", name: "cta_btn1", widget: "string" }
+          - { label: "CTA button 2", name: "cta_btn2", widget: "string" }
+
+          # — Footer —
+          - { label: "Footer brand blurb", name: "footer_brand", widget: "text" }
+          - { label: "Footer: Shop column heading", name: "footer_shop_h", widget: "string" }
+          - { label: "Footer: Shop link 1", name: "footer_shop_1", widget: "string" }
+          - { label: "Footer: Shop link 2", name: "footer_shop_2", widget: "string" }
+          - { label: "Footer: Shop link 3", name: "footer_shop_3", widget: "string" }
+          - { label: "Footer: Shop link 4", name: "footer_shop_4", widget: "string" }
+          - { label: "Footer: Info column heading", name: "footer_info_h", widget: "string" }
+          - { label: "Footer: Info link 1", name: "footer_info_1", widget: "string" }
+          - { label: "Footer: Info link 2", name: "footer_info_2", widget: "string" }
+          - { label: "Footer: Info link 3", name: "footer_info_3", widget: "string" }
+          - { label: "Footer: Info link 4", name: "footer_info_4", widget: "string" }
+          - { label: "Footer: Help column heading", name: "footer_help_h", widget: "string" }
+          - { label: "Footer: Help link 1", name: "footer_help_1", widget: "string" }
+          - { label: "Footer: Help link 2", name: "footer_help_2", widget: "string" }
+          - { label: "Footer: Help link 3", name: "footer_help_3", widget: "string" }
+          - { label: "Footer: Help link 4", name: "footer_help_4", widget: "string" }
+          - { label: "Footer tagline (small print, top)", name: "footer_tagline", widget: "string" }
+
+          # — Cart drawer —
+          - { label: "Cart title", name: "cart_title", widget: "string" }
+          - { label: "Cart empty message", name: "cart_empty", widget: "string" }
+          - { label: "Cart total label", name: "cart_total", widget: "string" }
+          - { label: "Cart checkout button", name: "cart_checkout", widget: "string" }
+
+      - name: "ca"
+        label: "🇦🇩 Català"
+        file: "Website/i18n/ca.json"
+        fields: *translation_fields
+
+      - name: "es"
+        label: "🇪🇸 Español"
+        file: "Website/i18n/es.json"
+        fields: *translation_fields
+
+      - name: "fr"
+        label: "🇫🇷 Français"
+        file: "Website/i18n/fr.json"
+        fields: *translation_fields
+
+      - name: "de"
+        label: "🇩🇪 Deutsch"
+        file: "Website/i18n/de.json"
+        fields: *translation_fields
+
+      - name: "it"
+        label: "🇮🇹 Italiano"
+        file: "Website/i18n/it.json"
+        fields: *translation_fields
+
+      - name: "nl"
+        label: "🇳🇱 Nederlands"
+        file: "Website/i18n/nl.json"
+        fields: *translation_fields
+
+      - name: "pt"
+        label: "🇵🇹 Português"
+        file: "Website/i18n/pt.json"
+        fields: *translation_fields
+
+      - name: "ja"
+        label: "🇯🇵 日本語"
+        file: "Website/i18n/ja.json"
+        fields: *translation_fields
+
+      - name: "zh"
+        label: "🇨🇳 中文"
+        file: "Website/i18n/zh.json"
+        fields: *translation_fields

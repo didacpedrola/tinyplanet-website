@@ -1,0 +1,1515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tiny Planet — Travel Journals & Guides for Kids</title>
+<meta name="description" content="Turn every family trip into an adventure kids will never forget. Travel journals and guides for young explorers aged 6–12.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:      #16315F;
+  --navy-deep: #0F2044;
+  --teal:      #1D9E75;
+  --teal-lt:   #3DC99B;
+  --gold:      #F6A623;
+  --gold-dk:   #D4881A;
+  --cream:     #FBF3DC;
+  --cream-dk:  #F2E6C0;
+  --white:     #FFFFFF;
+  --muted:     #5A6E99;
+  --r-sm: 16px;
+  --r-md: 24px;
+  --r-lg: 32px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{font-family:'Baloo 2',sans-serif;color:var(--navy);background:var(--white);overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+
+/* ── UTILS ── */
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+.reveal.in{opacity:1;transform:none}
+.reveal-left{opacity:0;transform:translateX(-32px);transition:opacity .65s ease,transform .65s ease}
+.reveal-left.in{opacity:1;transform:none}
+.reveal-right{opacity:0;transform:translateX(32px);transition:opacity .65s ease,transform .65s ease}
+.reveal-right.in{opacity:1;transform:none}
+.delay-1{transition-delay:.1s}
+.delay-2{transition-delay:.2s}
+.delay-3{transition-delay:.3s}
+.delay-4{transition-delay:.4s}
+.delay-5{transition-delay:.5s}
+
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:'Baloo 2',sans-serif;font-weight:800;border:none;cursor:pointer;border-radius:100px;transition:transform .2s,box-shadow .2s,background .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn-gold{background:var(--gold);color:var(--navy);padding:15px 36px;font-size:16px;box-shadow:0 4px 20px rgba(246,166,35,.38)}
+.btn-gold:hover{background:var(--gold-dk);box-shadow:0 8px 32px rgba(246,166,35,.5)}
+.btn-ghost-white{background:transparent;color:#fff;padding:14px 32px;font-size:15px;border:2px solid rgba(255,255,255,.35)}
+.btn-ghost-white:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+.btn-white{background:#fff;color:var(--teal);padding:15px 40px;font-size:16px;box-shadow:0 4px 24px rgba(0,0,0,.14)}
+.btn-white:hover{box-shadow:0 8px 36px rgba(0,0,0,.22)}
+.btn-outline-navy{background:transparent;color:var(--navy);padding:13px 32px;font-size:15px;border:2px solid var(--navy)}
+.btn-outline-navy:hover{background:var(--navy);color:#fff}
+
+/* ── SECTION LABELS ── */
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:10px}
+.section-title{font-size:clamp(28px,4vw,50px);font-weight:800;color:var(--navy);line-height:1.12;margin-bottom:14px}
+.section-sub{font-size:17px;color:var(--muted);line-height:1.75;max-width:520px;margin-bottom:52px}
+
+/* ─────────────────────────────
+   NAV
+───────────────────────────── */
+#nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 52px;height:72px;display:flex;align-items:center;justify-content:space-between;border-radius:0;background-color:transparent;box-shadow:none;transition:background-color .5s ease,box-shadow .5s ease;transform:translateZ(0);-webkit-transform:translateZ(0)}
+#nav.scrolled{background-color:rgb(255,255,255);box-shadow:0 1px 0 rgba(22,49,95,.08)}
+.nav-logo,.nav-center,.nav-right{transform:translateZ(0)}
+.nav-logo{display:flex;align-items:center;gap:0;line-height:1}
+.logo-word{font-weight:800;font-size:30px;color:#fff;transition:color .4s}
+#nav.scrolled .logo-word{color:var(--navy)}
+.logo-svg{height:48px;width:auto}
+.nav-center{display:flex;align-items:center;gap:32px;list-style:none}
+.nav-center a{font-weight:700;font-size:14px;color:#fff;opacity:.8;transition:opacity .2s,color .4s}
+#nav.scrolled .nav-center a{color:var(--navy)}
+.nav-center a:hover{opacity:1}
+.nav-right{display:flex;align-items:center;gap:16px}
+.lang-btn{font-family:'Baloo 2',sans-serif;font-size:13px;font-weight:700;background:none;border:1.5px solid rgba(255,255,255,.35);border-radius:100px;padding:6px 14px;cursor:pointer;color:#fff;display:flex;align-items:center;gap:6px;transition:border-color .4s,color .4s}
+#nav.scrolled .lang-btn{color:var(--navy);border-color:rgba(22,49,95,.18)}
+.lang-btn:hover{border-color:rgba(255,255,255,.8)}
+#nav.scrolled .lang-btn:hover{border-color:var(--navy)}
+.hamburger span{display:block;width:24px;height:2.5px;background:#fff;border-radius:2px;transition:transform .3s,opacity .3s,background .4s}
+#nav.scrolled .hamburger span{background:var(--navy)}
+.lang-dropdown{position:absolute;top:calc(100% + 8px);right:0;background:#fff;border-radius:var(--r-sm);box-shadow:0 8px 40px rgba(22,49,95,.14);padding:8px;min-width:180px;display:none;z-index:300}
+.lang-dropdown.open{display:block}
+.lang-wrap{position:relative}
+.lang-dropdown button{display:block;width:100%;text-align:left;background:none;border:none;font-family:'Baloo 2',sans-serif;font-size:14px;font-weight:600;color:var(--navy);padding:9px 14px;border-radius:10px;cursor:pointer;transition:background .15s}
+.lang-dropdown button:hover,.lang-dropdown button.active{background:var(--cream)}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+.hamburger span{display:block;width:24px;height:2.5px;background:var(--navy);border-radius:2px;transition:transform .3s,opacity .3s}
+.mobile-menu{display:none;position:fixed;inset:0;background:#fff;z-index:190;flex-direction:column;align-items:center;justify-content:center;gap:28px}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-size:26px;font-weight:800;color:var(--navy)}
+
+/* ─────────────────────────────
+   HERO — full-screen slider
+───────────────────────────── */
+.hero{height:78vh;min-height:520px;position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:0 0 64px}
+
+/* Slides track */
+.hero-slides{position:absolute;inset:0}
+.hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease;background:linear-gradient(148deg,var(--navy-deep) 0%,var(--navy) 60%,#1B5C46 100%)}
+.hero-slide.active{opacity:1}
+.hero-slide img{width:100%;height:100%;object-fit:cover;display:block}
+.slide-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;color:rgba(255,255,255,.18);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.slide-placeholder svg{width:52px;height:52px;opacity:.2}
+
+/* Gradient overlay — bottom-heavy so text is always readable */
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,18,46,.88) 0%,rgba(8,18,46,.4) 45%,rgba(8,18,46,.05) 100%),linear-gradient(to bottom,rgba(0,0,0,.45) 0%,transparent 160px);z-index:1}
+
+/* Text content */
+.hero-content{position:relative;z-index:2;width:100%;padding:0 80px;display:flex;align-items:flex-end;justify-content:space-between;gap:60px}
+.hero-left{max-width:600px}
+.hero h1{font-size:clamp(40px,5.5vw,76px);font-weight:800;color:#fff;line-height:1.06;margin-bottom:20px}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero-sub{font-size:18px;line-height:1.72;color:rgba(255,255,255,.78);margin-bottom:36px;max-width:480px}
+.hero-actions{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.hero-right{display:flex;flex-direction:column;gap:20px;align-items:flex-end;flex-shrink:0;padding-bottom:4px}
+.hero-trust{display:flex;flex-direction:column;gap:16px;text-align:right}
+.trust-item .num{font-size:30px;font-weight:800;color:var(--gold);line-height:1}
+.trust-item .lbl{font-size:12px;color:rgba(255,255,255,.45);font-weight:600;letter-spacing:.06em;margin-top:3px}
+
+/* Prev / Next arrows */
+.slider-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:3;background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.22);color:#fff;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(6px);transition:background .2s,transform .2s}
+.slider-arrow:hover{background:rgba(255,255,255,.24);transform:translateY(-50%) scale(1.06)}
+.slider-arrow svg{width:22px;height:22px;stroke:#fff;stroke-width:2.2;fill:none}
+.slider-prev{left:28px}
+.slider-next{right:28px}
+
+/* Dots */
+.slider-dots{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);z-index:3;display:flex;gap:8px}
+.slider-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.35);border:none;cursor:pointer;padding:0;transition:background .3s,transform .3s}
+.slider-dot.active{background:#fff;transform:scale(1.25)}
+
+/* Slide caption (location label) */
+.slide-caption{position:absolute;top:24px;right:28px;z-index:3;background:rgba(255,255,255,.12);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.18);color:#fff;font-size:12px;font-weight:700;letter-spacing:.08em;padding:6px 16px;border-radius:100px;opacity:0;transition:opacity .6s .4s}
+.hero-slide.active .slide-caption{opacity:1}
+
+/* ─────────────────────────────
+   PROBLEM BAND
+───────────────────────────── */
+.problem{background:var(--cream);padding:72px 80px;text-align:center}
+.problem p{max-width:700px;margin:0 auto;font-size:21px;line-height:1.7;font-weight:500;color:var(--navy)}
+.problem p strong{color:var(--teal)}
+
+/* ─────────────────────────────
+   HOW IT WORKS
+───────────────────────────── */
+.how{padding:100px 80px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:0}
+.step{background:var(--cream);border-radius:var(--r-md);padding:40px 32px;position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s}
+.step:hover{transform:translateY(-6px);box-shadow:0 16px 48px rgba(22,49,95,.10)}
+.step::after{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;border-radius:0 0 var(--r-md) var(--r-md)}
+.step:nth-child(1)::after{background:var(--gold)}
+.step:nth-child(2)::after{background:var(--teal)}
+.step:nth-child(3)::after{background:var(--navy)}
+.step-num{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:18px}
+.step-icon{width:60px;height:60px;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;font-size:28px;margin-bottom:20px}
+.step h3{font-size:20px;font-weight:800;color:var(--navy);margin-bottom:10px}
+.step p{font-size:15px;line-height:1.7;color:var(--muted)}
+
+/* ─────────────────────────────
+   PHOTO BREAK — full-width emotional
+───────────────────────────── */
+.photo-break{height:480px;position:relative;overflow:hidden;background:var(--navy)}
+.photo-break-inner{width:100%;height:100%;position:relative}
+.photo-break .photo-slot{width:100%;height:100%;object-fit:cover;opacity:.75}
+.photo-break-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(15,32,68,.7) 0%,rgba(15,32,68,.2) 60%,transparent 100%)}
+.photo-break-text{position:absolute;left:80px;top:50%;transform:translateY(-50%)}
+.photo-break-text blockquote{font-size:clamp(22px,3vw,38px);font-weight:800;color:#fff;line-height:1.22;max-width:480px;margin-bottom:16px}
+.photo-break-text cite{font-size:14px;color:rgba(255,255,255,.55);font-style:normal;font-weight:700;letter-spacing:.06em}
+
+/* ─────────────────────────────
+   FEATURES (dark)
+───────────────────────────── */
+.features{background:var(--navy);padding:100px 80px}
+.features .eyebrow{color:var(--teal-lt)}
+.features .section-title{color:#fff}
+.features .section-sub{color:rgba(255,255,255,.55)}
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(255,255,255,.06);border-radius:var(--r-md);overflow:hidden}
+.feat{background:rgba(255,255,255,.04);padding:36px 28px;transition:background .2s}
+.feat:hover{background:rgba(255,255,255,.09)}
+.feat-icon{font-size:32px;margin-bottom:14px}
+.feat h3{font-size:16px;font-weight:800;color:#fff;margin-bottom:8px}
+.feat p{font-size:14px;line-height:1.7;color:rgba(255,255,255,.5)}
+
+/* ─────────────────────────────
+   CATALOGUE
+───────────────────────────── */
+.catalogue{padding:100px 80px;background:var(--white)}
+.catalogue-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:40px;gap:24px;flex-wrap:wrap}
+.catalogue-filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:40px}
+.filter-btn{font-family:'Baloo 2',sans-serif;font-size:13px;font-weight:700;background:none;border:1.5px solid rgba(22,49,95,.18);border-radius:100px;padding:8px 18px;cursor:pointer;color:var(--navy);transition:all .2s}
+.filter-btn:hover,.filter-btn.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.search-box{font-family:'Baloo 2',sans-serif;font-size:14px;font-weight:600;border:1.5px solid rgba(22,49,95,.18);border-radius:100px;padding:10px 20px;color:var(--navy);width:240px;outline:none;transition:border-color .2s}
+.search-box::placeholder{color:var(--muted);font-weight:500}
+.search-box:focus{border-color:var(--teal)}
+.passports-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:24px}
+.passport-card{border-radius:var(--r-md);overflow:hidden;background:var(--cream);cursor:pointer;transition:transform .25s,box-shadow .25s;position:relative}
+.passport-card:hover{transform:translateY(-6px);box-shadow:0 20px 48px rgba(22,49,95,.13)}
+.passport-img{aspect-ratio:3/4;background:linear-gradient(135deg,var(--cream-dk) 0%,var(--cream) 100%);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.book-flag{position:absolute;top:14px;left:14px;font-size:22px}
+.passport-img-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;width:100%;height:100%}
+.passport-img-placeholder .country-emoji{font-size:52px}
+.passport-img-placeholder .country-name-big{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.book-info{padding:18px 18px 20px}
+.book-country{font-size:16px;font-weight:800;color:var(--navy);margin-bottom:4px}
+.book-meta{font-size:12px;color:var(--muted);font-weight:600;margin-bottom:12px}
+.book-ages{display:flex;gap:6px;margin-bottom:14px}
+.age-tag{font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px;background:rgba(22,49,95,.08);color:var(--navy)}
+.book-price{font-size:20px;font-weight:800;color:var(--navy)}
+.book-add{width:100%;font-family:'Baloo 2',sans-serif;font-size:13px;font-weight:800;background:var(--navy);color:#fff;border:none;border-radius:100px;padding:10px;cursor:pointer;transition:background .2s,transform .15s}
+.book-add:hover{background:var(--teal);transform:scale(1.02)}
+.book-badge-new{position:absolute;top:14px;right:14px;background:var(--teal);color:#fff;font-size:10px;font-weight:800;padding:4px 10px;border-radius:100px;letter-spacing:.06em;text-transform:uppercase}
+.book-badge-soon{position:absolute;top:14px;right:14px;background:var(--gold);color:var(--navy);font-size:10px;font-weight:800;padding:4px 10px;border-radius:100px;letter-spacing:.06em;text-transform:uppercase}
+
+/* ─────────────────────────────
+   PHOTO GRID — 2 big + 2 tall
+───────────────────────────── */
+.photo-grid-section{padding:0 80px 100px}
+.photo-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;grid-template-rows:300px 300px;gap:16px}
+.pg-item{border-radius:var(--r-md);overflow:hidden;background:var(--cream-dk);position:relative}
+.pg-item.tall{grid-row:span 2}
+.pg-item .photo-slot-inner{width:100%;height:100%;object-fit:cover}
+.pg-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;color:var(--muted);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.pg-placeholder svg{opacity:.35;width:32px;height:32px}
+.pg-label{position:absolute;bottom:14px;left:14px;background:rgba(15,32,68,.72);color:#fff;font-size:12px;font-weight:700;padding:5px 12px;border-radius:100px;backdrop-filter:blur(8px)}
+
+/* ─────────────────────────────
+   TESTIMONIALS
+───────────────────────────── */
+.testimonials{background:var(--cream);padding:100px 80px}
+.testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:52px}
+.t-card{background:#fff;border-radius:var(--r-md);padding:28px;box-shadow:0 2px 20px rgba(22,49,95,.06);transition:transform .2s,box-shadow .2s}
+.t-card:hover{transform:translateY(-4px);box-shadow:0 8px 36px rgba(22,49,95,.10)}
+.stars{color:var(--gold);font-size:14px;letter-spacing:2px;margin-bottom:14px}
+.t-card blockquote{font-size:15px;line-height:1.72;color:var(--navy);font-style:italic;margin-bottom:20px}
+.reviewer{display:flex;align-items:center;gap:12px}
+.avatar{width:38px;height:38px;border-radius:50%;background:var(--teal);display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;font-size:13px;flex-shrink:0}
+.reviewer-name{font-size:14px;font-weight:800;color:var(--navy)}
+.reviewer-loc{font-size:12px;color:var(--muted)}
+
+/* ─────────────────────────────
+   ABOUT
+───────────────────────────── */
+.about{padding:100px 80px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.about-photos{position:relative}
+.about-main-photo{width:100%;aspect-ratio:4/5;border-radius:var(--r-lg);overflow:hidden;background:var(--cream-dk)}
+.about-float-card{position:absolute;bottom:-24px;right:-24px;background:var(--teal);border-radius:var(--r-md);padding:22px 26px;color:#fff;box-shadow:0 8px 32px rgba(29,158,117,.3)}
+.about-float-card .big{font-size:28px;font-weight:800;display:block;line-height:1}
+.about-float-card .small{font-size:14px;font-weight:600;opacity:.8;margin-top:4px}
+.about-text .section-title em{font-style:normal;color:var(--teal)}
+.about-text p{font-size:16px;line-height:1.8;color:var(--muted);margin-bottom:16px}
+.values{display:flex;flex-direction:column;gap:14px;margin:28px 0 36px}
+.value{display:flex;gap:14px;align-items:flex-start}
+.value-dot{width:10px;height:10px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:7px}
+.value-text{font-size:15px;font-weight:600;color:var(--navy);line-height:1.5}
+.value-text span{font-weight:400;color:var(--muted)}
+
+/* ─────────────────────────────
+   NEWSLETTER
+───────────────────────────── */
+.newsletter{padding:80px;background:var(--navy)}
+.newsletter-inner{max-width:560px;margin:0 auto;text-align:center}
+.newsletter h2{font-size:clamp(26px,3.5vw,40px);font-weight:800;color:#fff;margin-bottom:12px}
+.newsletter p{font-size:16px;color:rgba(255,255,255,.6);line-height:1.7;margin-bottom:32px}
+.newsletter-form{display:flex;gap:12px;max-width:440px;margin:0 auto}
+.newsletter-form input{flex:1;font-family:'Baloo 2',sans-serif;font-size:15px;font-weight:600;border:2px solid rgba(255,255,255,.2);border-radius:100px;padding:14px 22px;background:rgba(255,255,255,.08);color:#fff;outline:none;transition:border-color .2s}
+.newsletter-form input::placeholder{color:rgba(255,255,255,.38)}
+.newsletter-form input:focus{border-color:var(--gold)}
+.newsletter-note{font-size:12px;color:rgba(255,255,255,.3);margin-top:14px;font-weight:600}
+
+/* ─────────────────────────────
+   CTA BAND
+───────────────────────────── */
+.cta-band{background:linear-gradient(135deg,var(--teal) 0%,#0B6645 100%);padding:100px 80px;text-align:center;position:relative;overflow:hidden}
+.cta-band::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 25% 50%,rgba(246,166,35,.14) 0%,transparent 55%),radial-gradient(ellipse at 80% 20%,rgba(255,255,255,.07) 0%,transparent 50%)}
+.cta-band>*{position:relative;z-index:1}
+.cta-band h2{font-size:clamp(32px,5vw,58px);font-weight:800;color:#fff;line-height:1.1;margin-bottom:16px}
+.cta-band p{font-size:18px;color:rgba(255,255,255,.75);margin-bottom:44px}
+.cta-band-actions{display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap}
+
+/* ─────────────────────────────
+   FOOTER
+───────────────────────────── */
+footer{background:var(--navy-deep);padding:64px 80px 40px}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+.footer-brand p{font-size:14px;line-height:1.7;color:rgba(255,255,255,.38);margin-top:14px;max-width:240px}
+.footer-col h4{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:14px}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.footer-col a{font-size:14px;font-weight:600;color:rgba(255,255,255,.5);transition:color .2s}
+.footer-col a:hover{color:var(--teal-lt)}
+.footer-langs{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
+.footer-lang-tag{font-size:11px;font-weight:700;color:rgba(255,255,255,.3);padding:3px 10px;border:1px solid rgba(255,255,255,.12);border-radius:100px}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.07);padding-top:28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.footer-tagline{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.25)}
+.footer-copy{font-size:13px;color:rgba(255,255,255,.25)}
+
+/* ─────────────────────────────
+   PRODUCT DETAIL PAGE
+───────────────────────────── */
+.pdp-page{position:fixed;inset:0;z-index:500;background:#fff;overflow-y:auto;transform:translateY(100%);transition:transform .45s cubic-bezier(.4,0,.2,1)}
+.pdp-page.open{transform:none}
+.pdp-close{position:fixed;top:20px;right:24px;z-index:510;background:rgba(22,49,95,.08);border:none;border-radius:50%;width:44px;height:44px;cursor:pointer;display:none;align-items:center;justify-content:center;font-size:20px;color:var(--navy);transition:background .2s}
+.pdp-close:hover{background:rgba(22,49,95,.15)}
+.pdp-page.open ~ .pdp-close,.pdp-close.visible{display:flex}
+.pdp-hero{display:grid;grid-template-columns:1.1fr 1fr;min-height:100vh;align-items:start}
+.pdp-gallery{position:sticky;top:0;height:100vh;overflow:hidden;background:var(--cream)}
+.pdp-gallery-main{width:100%;height:68%;object-fit:cover;display:block;background:var(--cream-dk);cursor:pointer;transition:opacity .3s}
+.pdp-gallery-main.placeholder{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;color:var(--muted);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.pdp-gallery-thumbs{display:flex;gap:8px;padding:12px;overflow-x:auto;height:32%}
+.pdp-thumb{width:80px;height:80px;flex-shrink:0;object-fit:cover;border-radius:10px;cursor:pointer;border:2px solid transparent;transition:border-color .2s;background:var(--cream-dk)}
+.pdp-thumb.active{border-color:var(--navy)}
+.pdp-thumb.placeholder{display:flex;align-items:center;justify-content:center;font-size:20px}
+.pdp-info{padding:64px 56px 80px;overflow-y:auto}
+.pdp-eyebrow{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:10px}
+.pdp-title{font-size:clamp(32px,4vw,52px);font-weight:800;color:var(--navy);line-height:1.1;margin-bottom:16px}
+.pdp-sub{font-size:16px;line-height:1.75;color:var(--muted);margin-bottom:32px}
+.pdp-variants{display:flex;flex-direction:column;gap:10px;margin-bottom:32px}
+.pdp-variant-label{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--navy);margin-bottom:8px}
+.pdp-variant-row{display:flex;gap:10px;flex-wrap:wrap}
+.pdp-variant-btn{font-family:'Baloo 2',sans-serif;font-size:14px;font-weight:700;padding:10px 20px;border-radius:100px;border:1.5px solid rgba(22,49,95,.2);background:none;color:var(--navy);cursor:pointer;transition:all .2s}
+.pdp-variant-btn:hover{border-color:var(--navy)}
+.pdp-variant-btn.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.pdp-price-row{display:flex;align-items:center;gap:20px;margin-bottom:28px}
+.pdp-price{font-size:40px;font-weight:800;color:var(--navy)}
+.pdp-shipping{font-size:13px;color:var(--muted);font-weight:600;line-height:1.5}
+.pdp-add-btn{width:100%;font-family:'Baloo 2',sans-serif;font-size:17px;font-weight:800;background:var(--gold);color:var(--navy);border:none;border-radius:100px;padding:18px;cursor:pointer;transition:background .2s,transform .15s;box-shadow:0 4px 20px rgba(246,166,35,.35);margin-bottom:14px}
+.pdp-add-btn:hover{background:var(--gold-dk);transform:translateY(-2px);box-shadow:0 8px 28px rgba(246,166,35,.45)}
+.pdp-features{margin-top:40px;padding-top:36px;border-top:1px solid rgba(22,49,95,.08);display:flex;flex-direction:column;gap:14px}
+.pdp-feature{display:flex;gap:14px;align-items:flex-start}
+.pdp-feature-icon{width:36px;height:36px;border-radius:10px;background:var(--cream);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.pdp-feature-text strong{font-size:14px;font-weight:800;color:var(--navy);display:block}
+.pdp-feature-text span{font-size:13px;color:var(--muted);line-height:1.5}
+@media(max-width:768px){
+  .pdp-hero{grid-template-columns:1fr}
+  .pdp-gallery{position:relative;height:60vw;min-height:260px}
+  .pdp-info{padding:32px 24px 60px}
+  .pdp-close{top:12px;right:12px}
+}
+
+/* ─────────────────────────────
+   CART DRAWER (simple side panel)
+───────────────────────────── */
+.cart-overlay{position:fixed;inset:0;background:rgba(15,32,68,.5);z-index:400;opacity:0;pointer-events:none;transition:opacity .3s;backdrop-filter:blur(4px)}
+.cart-overlay.open{opacity:1;pointer-events:all}
+.cart-drawer{position:fixed;top:0;right:0;bottom:0;width:min(420px,100vw);background:#fff;z-index:401;transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column}
+.cart-drawer.open{transform:none}
+.cart-header{padding:24px 28px;border-bottom:1px solid rgba(22,49,95,.08);display:flex;align-items:center;justify-content:space-between}
+.cart-header h3{font-size:18px;font-weight:800;color:var(--navy)}
+.cart-close{background:none;border:none;cursor:pointer;font-size:22px;color:var(--muted);line-height:1}
+.cart-body{flex:1;overflow-y:auto;padding:24px 28px;display:flex;flex-direction:column;gap:16px}
+.cart-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:12px;color:var(--muted);font-size:15px;font-weight:600}
+.cart-item{display:flex;gap:14px;padding:14px;background:var(--cream);border-radius:var(--r-sm);align-items:center}
+.cart-item-img{width:52px;height:68px;border-radius:10px;background:var(--cream-dk);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:24px}
+.cart-item-info{flex:1}
+.cart-item-name{font-size:14px;font-weight:800;color:var(--navy);margin-bottom:3px}
+.cart-item-sub{font-size:12px;color:var(--muted);font-weight:600}
+.cart-item-price{font-size:16px;font-weight:800;color:var(--navy)}
+.cart-item-remove{background:none;border:none;cursor:pointer;color:var(--muted);font-size:18px;padding:2px 6px;transition:color .15s}
+.cart-item-remove:hover{color:#e74c3c}
+.cart-footer{padding:20px 28px 28px;border-top:1px solid rgba(22,49,95,.08)}
+.cart-total{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.cart-total span{font-size:16px;font-weight:800;color:var(--navy)}
+
+/* ─────────────────────────────
+   RESPONSIVE
+───────────────────────────── */
+@media(max-width:1024px){
+  .hero-content{flex-direction:column;align-items:flex-start;justify-content:flex-end;padding:0 52px}
+  .hero-right{display:none}
+  .about{grid-template-columns:1fr;gap:48px}
+  .about-photos{max-width:500px}
+  .footer-top{grid-template-columns:1fr 1fr;gap:32px}
+}
+@media(max-width:768px){
+  #nav{padding:0 24px}
+  .nav-center,.nav-right .btn{display:none}
+  .hamburger{display:flex}
+  .hero-content{padding:0 28px}
+  .problem,.how,.features,.catalogue,.photo-grid-section,.testimonials,.about,.newsletter,.cta-band{padding:60px 28px}
+  .steps{grid-template-columns:1fr}
+  .features-grid{grid-template-columns:1fr 1fr}
+  .passports-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}
+  .testimonials-grid{grid-template-columns:1fr}
+  .photo-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+  .pg-item.tall{grid-row:span 1}
+  .photo-break{height:340px}
+  .photo-break-text{left:28px;right:28px}
+  .newsletter-form{flex-direction:column}
+  .footer-top{grid-template-columns:1fr}
+  .cta-band-actions{flex-direction:column}
+}
+@media(max-width:480px){
+  .features-grid{grid-template-columns:1fr}
+  .passports-grid{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<!-- ─── CART OVERLAY ─── -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-header">
+    <h3 data-i18n="cart_title">Your Cart</h3>
+    <button class="cart-close" onclick="closeCart()">✕</button>
+  </div>
+  <div class="cart-body" id="cartBody">
+    <div class="cart-empty">
+      <span style="font-size:36px">🌍</span>
+      <span data-i18n="cart_empty">Your cart is empty</span>
+    </div>
+  </div>
+  <div class="cart-footer" id="cartFooter" style="display:none">
+    <div class="cart-total">
+      <span data-i18n="cart_total">Total</span>
+      <span id="cartTotal">€0.00</span>
+    </div>
+    <button class="btn btn-gold" style="width:100%;justify-content:center;font-size:15px" data-i18n="cart_checkout">Checkout</button>
+  </div>
+</div>
+
+<!-- ─── PRODUCT DETAIL PAGE ─── -->
+<div class="pdp-page" id="pdpPage">
+  <div class="pdp-hero">
+    <div class="pdp-gallery">
+      <img class="pdp-gallery-main" id="pdpMainImg" src="" alt="">
+      <div class="pdp-gallery-thumbs" id="pdpThumbs"></div>
+    </div>
+    <div class="pdp-info">
+      <div class="pdp-eyebrow" id="pdpEyebrow">Adventure Passport</div>
+      <h1 class="pdp-title" id="pdpTitle"></h1>
+      <p class="pdp-sub" id="pdpSub"></p>
+      <div class="pdp-variants" id="pdpVariants"></div>
+      <div class="pdp-price-row">
+        <div class="pdp-price" id="pdpPrice"></div>
+        <div class="pdp-shipping">Free shipping over €40<br>Ships worldwide in 5–8 days</div>
+      </div>
+      <button class="pdp-add-btn" id="pdpAddBtn" onclick="pdpAddToCart()">Add to Cart</button>
+      <div class="pdp-features">
+        <div class="pdp-feature"><div class="pdp-feature-icon">✏️</div><div class="pdp-feature-text"><strong>Journaling pages</strong><span>Guided prompts and free space to draw, write, and stick.</span></div></div>
+        <div class="pdp-feature"><div class="pdp-feature-icon">🎮</div><div class="pdp-feature-text"><strong>Games & challenges</strong><span>Scavenger hunts, observation tasks, and local missions.</span></div></div>
+        <div class="pdp-feature"><div class="pdp-feature-icon">🏅</div><div class="pdp-feature-text"><strong>Explorer level system</strong><span>Earn ranks and achievements as you explore.</span></div></div>
+        <div class="pdp-feature"><div class="pdp-feature-icon">🎨</div><div class="pdp-feature-text"><strong>Sticker collection</strong><span>Places, foods, animals and transport to collect every trip.</span></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+<button class="pdp-close" id="pdpClose" onclick="closePDP()">✕</button>
+
+<!-- ─── MOBILE MENU ─── -->
+<div class="mobile-menu" id="mobileMenu">
+  <button onclick="closeMobileMenu()" style="position:absolute;top:24px;right:24px;background:none;border:none;font-size:24px;cursor:pointer;color:var(--navy)">✕</button>
+  <a href="#how-it-works" onclick="closeMobileMenu()" data-i18n="nav_how">How it works</a>
+  <a href="#catalogue" onclick="closeMobileMenu()" data-i18n="nav_books">Adventure Passports</a>
+  <a href="#about" onclick="closeMobileMenu()" data-i18n="nav_about">Our Story</a>
+  <a href="#" class="btn btn-gold" onclick="closeMobileMenu()" data-i18n="nav_shop">Shop Now</a>
+</div>
+
+<!-- ─── NAV ─── -->
+<nav id="nav">
+  <a class="nav-logo" href="#">
+    <span class="logo-word">tiny</span>
+    <!-- Planet SVG logo mark -->
+    <svg class="logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 270">
+      <defs>
+        <clipPath id="lp"><circle cx="150" cy="130" r="86"/></clipPath>
+        <clipPath id="lf"><circle cx="150" cy="130" r="91"/></clipPath>
+      </defs>
+      <circle cx="150" cy="130" r="86" fill="none" stroke="#16315F" stroke-width="13"/>
+      <g transform="rotate(-18 150 130)">
+        <path d="M18 130a132 44 0 1 0 264 0a132 44 0 1 0-264 0ZM42 130a108 27 0 1 1 216 0a108 27 0 1 1-216 0Z" fill="#F6A623" fill-rule="evenodd" stroke="#16315F" stroke-width="5"/>
+      </g>
+      <circle cx="150" cy="130" r="86" fill="#F6B12B"/>
+      <g clip-path="url(#lp)">
+        <circle cx="150" cy="130" r="86" fill="#E49020"/>
+        <circle cx="141" cy="118" r="86" fill="#F6B12B"/>
+        <circle cx="98" cy="104" r="11" fill="#D4801A" opacity=".85"/>
+        <circle cx="202" cy="96" r="7" fill="#D4801A" opacity=".85"/>
+        <circle cx="194" cy="140" r="14" fill="#D4801A" opacity=".85"/>
+      </g>
+      <circle cx="150" cy="130" r="86" fill="none" stroke="#16315F" stroke-width="5"/>
+      <text x="152" y="137" font-family="'Baloo 2',sans-serif" font-weight="800" font-size="140" text-anchor="middle" dominant-baseline="central" fill="#D9CFA0">T</text>
+      <text x="150" y="130" font-family="'Baloo 2',sans-serif" font-weight="800" font-size="140" text-anchor="middle" dominant-baseline="central" fill="#FBF3DC">T</text>
+      <g transform="rotate(-18 150 130)" clip-path="url(#lf)">
+        <path d="M18 130A132 44 0 0 0 282 130L258 130A108 27 0 0 1 42 130Z" fill="#F6A623" stroke="#16315F" stroke-width="5"/>
+      </g>
+    </svg>
+    <span class="logo-word">planet</span>
+  </a>
+
+  <ul class="nav-center">
+    <li><a href="#how-it-works" data-i18n="nav_how">How it works</a></li>
+    <li><a href="#catalogue" data-i18n="nav_books">Adventure Passports</a></li>
+    <li><a href="#about" data-i18n="nav_about">Our Story</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <div class="lang-wrap">
+      <button class="lang-btn" onclick="toggleLang()" id="langBtn">🌐 EN ▾</button>
+      <div class="lang-dropdown" id="langDropdown">
+        <button onclick="setLang('en')">English</button>
+        <button onclick="setLang('ca')">Català</button>
+        <button onclick="setLang('es')">Español</button>
+        <button onclick="setLang('fr')">Français</button>
+        <button onclick="setLang('de')">Deutsch</button>
+        <button onclick="setLang('it')">Italiano</button>
+        <button onclick="setLang('nl')">Nederlands</button>
+        <button onclick="setLang('pt')">Português</button>
+        <button onclick="setLang('ja')">日本語</button>
+        <button onclick="setLang('zh')">中文</button>
+      </div>
+    </div>
+    <button class="btn btn-gold" style="padding:10px 22px;font-size:13px" onclick="openCart()" data-i18n="nav_cart">🛒 Cart (0)</button>
+    <button class="hamburger" onclick="openMobileMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+
+  <div class="hero-slides" id="heroSlides">
+
+    <div class="hero-slide active">
+      <img src="images/Slide1.JPG" alt="Family adventure travel">
+    </div>
+
+    <div class="hero-slide">
+      <img src="images/Slide2.JPG" alt="Family adventure travel">
+    </div>
+
+    <div class="hero-slide">
+      <img src="images/Slide3.JPG" alt="Family adventure travel">
+    </div>
+
+    <div class="hero-slide">
+      <img src="images/Slide4.jpg" alt="Family adventure travel">
+    </div>
+
+    <div class="hero-slide">
+      <img src="images/Slide6.JPG" alt="Family adventure travel">
+    </div>
+
+  </div>
+
+  <!-- Gradient overlay -->
+  <div class="hero-overlay"></div>
+
+  <!-- Arrows -->
+  <button class="slider-arrow slider-prev" onclick="sliderMove(-1)" aria-label="Previous">
+    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <button class="slider-arrow slider-next" onclick="sliderMove(1)" aria-label="Next">
+    <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
+  </button>
+
+  <!-- Dots -->
+  <div class="slider-dots" id="sliderDots"></div>
+
+  <!-- Text content -->
+  <div class="hero-content">
+    <div class="hero-left">
+      <h1><span data-i18n="hero_h1a">Passport to the whole world.</span><br><em data-i18n="hero_h1b">One adventure at a time.</em></h1>
+      <p class="hero-sub" data-i18n="hero_sub">Tiny Planet adventure passports turn family travel into a game, a story, and a memory your kids will keep forever.</p>
+      <div class="hero-actions">
+        <a href="#catalogue" class="btn btn-gold" data-i18n="hero_cta1">Shop Adventure Passports</a>
+        <a href="#how-it-works" class="btn btn-ghost-white" data-i18n="hero_cta2">See how it works</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-trust">
+        <div class="trust-item" style="text-align:right">
+          <div class="num">20+</div>
+          <div class="lbl" data-i18n="trust_countries">Countries</div>
+        </div>
+        <div class="trust-item" style="text-align:right">
+          <div class="num">10</div>
+          <div class="lbl" data-i18n="trust_langs">Languages</div>
+        </div>
+        <div class="trust-item" style="text-align:right">
+          <div class="num">🌍</div>
+          <div class="lbl" data-i18n="trust_ships">Ships worldwide</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ─── PROBLEM BAND ─── -->
+<section class="problem">
+  <p class="reveal" data-i18n="problem_text">You've planned the perfect trip. But somewhere between the airport and the museum, the kids lose interest. Three months later, the thing they remember most? <strong>The hotel pool.</strong> Travel is one of the greatest gifts you can give your child. Tiny Planet makes sure they actually experience it.</p>
+</section>
+
+<!-- ─── HOW IT WORKS ─── -->
+<section class="how" id="how-it-works">
+  <div class="eyebrow reveal" data-i18n="how_label">How it works</div>
+  <h2 class="section-title reveal delay-1" data-i18n="how_title">Your kid becomes the explorer.<br>You become the hero parent.</h2>
+  <p class="section-sub reveal delay-2" data-i18n="how_sub">Three phases that turn any family holiday into an adventure they'll talk about for years.</p>
+  <div class="steps">
+    <div class="step reveal delay-1">
+      <div class="step-num" data-i18n="step1_num">Step 01</div>
+      <div class="step-icon" style="background:#FFF3D6">🗺️</div>
+      <h3 data-i18n="step1_title">Before the trip</h3>
+      <p data-i18n="step1_desc">Open the guide at home. Read about the history, culture, animals, and local food. Set up your Explorer profile and choose your mission goals. The excitement starts before you even pack.</p>
+    </div>
+    <div class="step reveal delay-2">
+      <div class="step-num" data-i18n="step2_num">Step 02</div>
+      <div class="step-icon" style="background:#D6F5EC">✏️</div>
+      <h3 data-i18n="step2_title">During the trip</h3>
+      <p data-i18n="step2_desc">Complete daily challenges, answer quizzes, spot local curiosities, and journal every discovery in real time. Every day is a new level to unlock.</p>
+    </div>
+    <div class="step reveal delay-3">
+      <div class="step-num" data-i18n="step3_num">Step 03</div>
+      <div class="step-icon" style="background:#D6E4FF">🌟</div>
+      <h3 data-i18n="step3_title">After the trip</h3>
+      <p data-i18n="step3_desc">Fill the final pages with photos, drawings, and memories. Earn stamps, complete the sticker collection, and discover your Explorer rank. The adventure lives on.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── EMOTIONAL PHOTO BREAK ─── -->
+<div class="photo-break">
+  <div class="photo-break-inner">
+    <div class="photo-slot" style="width:100%;height:100%;background:linear-gradient(135deg,#1D9E75 0%,#0B6645 100%);display:flex;align-items:center;justify-content:center">
+      <div style="color:rgba(255,255,255,.15);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase">Full-width emotional travel photo — replace with real image</div>
+    </div>
+    <div class="photo-break-overlay"></div>
+    <div class="photo-break-text reveal-left">
+      <blockquote data-i18n="quote1">"The kids were engaged, curious, and actually talking to us about what they were seeing."</blockquote>
+      <cite data-i18n="quote1_attr">— Claire M., Dublin</cite>
+    </div>
+  </div>
+</div>
+
+<!-- ─── FEATURES ─── -->
+<section class="features">
+  <div class="eyebrow reveal" data-i18n="feat_label">What's inside</div>
+  <h2 class="section-title reveal delay-1" data-i18n="feat_title">One guide.<br>A whole world of discovery.</h2>
+  <p class="section-sub reveal delay-2" data-i18n="feat_sub">Everything designed to keep curious minds engaged — before, during, and after every trip.</p>
+  <div class="features-grid">
+    <div class="feat reveal">
+      <div class="feat-icon">📖</div>
+      <h3 data-i18n="feat1_title">Cultural deep dives</h3>
+      <p data-i18n="feat1_desc">Age-appropriate history, geography, and curiosities. Written to spark questions, not end them.</p>
+    </div>
+    <div class="feat reveal delay-1">
+      <div class="feat-icon">🎮</div>
+      <h3 data-i18n="feat2_title">Games & challenges</h3>
+      <p data-i18n="feat2_desc">Scavenger hunts, observation tasks, and local missions that turn sightseeing into an adventure.</p>
+    </div>
+    <div class="feat reveal delay-2">
+      <div class="feat-icon">🧠</div>
+      <h3 data-i18n="feat3_title">Quizzes & trivia</h3>
+      <p data-i18n="feat3_desc">Fun questions that make kids want to learn — and show off what they know to the whole family.</p>
+    </div>
+    <div class="feat reveal delay-1">
+      <div class="feat-icon">✍️</div>
+      <h3 data-i18n="feat4_title">Journaling pages</h3>
+      <p data-i18n="feat4_desc">Guided prompts and free space to draw, write, and stick. Their trip, in their own words.</p>
+    </div>
+    <div class="feat reveal delay-2">
+      <div class="feat-icon">🏅</div>
+      <h3 data-i18n="feat5_title">Explorer levels</h3>
+      <p data-i18n="feat5_desc">Earn ranks and achievement stamps as you explore. A gamification system built for curious minds.</p>
+    </div>
+    <div class="feat reveal delay-3">
+      <div class="feat-icon">🎨</div>
+      <h3 data-i18n="feat6_title">Sticker collection</h3>
+      <p data-i18n="feat6_desc">Places, foods, animals, and transport to collect across every trip. Each journey adds to the set.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CATALOGUE ─── -->
+<section class="catalogue" id="catalogue">
+  <div class="catalogue-header">
+    <div>
+      <div class="eyebrow reveal" data-i18n="cat_label">The Books</div>
+      <h2 class="section-title reveal delay-1" style="margin-bottom:0" data-i18n="cat_title">Choose your next adventure</h2>
+    </div>
+    <input type="text" class="search-box reveal" id="bookSearch" placeholder="Search country…" oninput="filterBooks()" data-i18n-placeholder="cat_search">
+  </div>
+  <div class="catalogue-filters" id="catFilters">
+    <button class="filter-btn active" onclick="filterCat('all',this)" data-i18n="filter_all">All</button>
+    <button class="filter-btn" onclick="filterCat('europe',this)" data-i18n="filter_europe">Europe</button>
+    <button class="filter-btn" onclick="filterCat('asia',this)" data-i18n="filter_asia">Asia</button>
+    <button class="filter-btn" onclick="filterCat('americas',this)" data-i18n="filter_americas">Americas</button>
+    <button class="filter-btn" onclick="filterCat('africa',this)" data-i18n="filter_africa">Africa</button>
+    <button class="filter-btn" onclick="filterCat('oceania',this)" data-i18n="filter_oceania">Oceania</button>
+  </div>
+  <div class="passports-grid" id="booksGrid"></div>
+</section>
+
+<!-- ─── PHOTO GRID ─── -->
+<section class="photo-grid-section">
+  <div class="photo-grid">
+    <div class="pg-item tall">
+      <div class="pg-placeholder">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M21 15l-5-5L5 21"/></svg>
+        Kids at a landmark
+      </div>
+      <div class="pg-label">Tokyo, Japan 🇯🇵</div>
+    </div>
+    <div class="pg-item">
+      <div class="pg-placeholder">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M21 15l-5-5L5 21"/></svg>
+        Journal moment
+      </div>
+      <div class="pg-label">Morocco 🇲🇦</div>
+    </div>
+    <div class="pg-item">
+      <div class="pg-placeholder">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M21 15l-5-5L5 21"/></svg>
+        Book in hand
+      </div>
+    </div>
+    <div class="pg-item">
+      <div class="pg-placeholder">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M21 15l-5-5L5 21"/></svg>
+        Family exploring
+      </div>
+      <div class="pg-label">Brazil 🇧🇷</div>
+    </div>
+    <div class="pg-item">
+      <div class="pg-placeholder">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M21 15l-5-5L5 21"/></svg>
+        Sticker collection
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TESTIMONIALS ─── -->
+<section class="testimonials">
+  <div class="eyebrow reveal" data-i18n="test_label">What families say</div>
+  <h2 class="section-title reveal delay-1" data-i18n="test_title">They came home different.</h2>
+  <div class="testimonials-grid">
+    <div class="t-card reveal delay-1">
+      <div class="stars">★★★★★</div>
+      <blockquote data-i18n="t1">"My daughter carried it everywhere. She was pointing things out to us, asking questions, filling in pages at dinner. Best €20 we spent on the whole trip."</blockquote>
+      <div class="reviewer">
+        <div class="avatar">MT</div>
+        <div>
+          <div class="reviewer-name">Maria T.</div>
+          <div class="reviewer-loc">Barcelona, Spain</div>
+        </div>
+      </div>
+    </div>
+    <div class="t-card reveal delay-2">
+      <div class="stars">★★★★★</div>
+      <blockquote data-i18n="t2">"We've done three trips now with Tiny Planet. Our son says he doesn't want to travel without it. He's already asking where we're going next."</blockquote>
+      <div class="reviewer">
+        <div class="avatar">DR</div>
+        <div>
+          <div class="reviewer-name">David R.</div>
+          <div class="reviewer-loc">Amsterdam, Netherlands</div>
+        </div>
+      </div>
+    </div>
+    <div class="t-card reveal delay-3">
+      <div class="stars">★★★★★</div>
+      <blockquote data-i18n="t3">"It completely changed the dynamic. The kids were engaged, curious, and actually talking to us about what they were seeing."</blockquote>
+      <div class="reviewer">
+        <div class="avatar">CM</div>
+        <div>
+          <div class="reviewer-name">Claire M.</div>
+          <div class="reviewer-loc">Dublin, Ireland</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ABOUT ─── -->
+<section class="about" id="about">
+  <div class="about-photos reveal-left">
+    <div class="about-main-photo">
+      <div class="pg-placeholder" style="height:100%">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:36px;height:36px"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M21 15l-5-5L5 21"/></svg>
+        Founder / family photo
+      </div>
+    </div>
+    <div class="about-float-card">
+      <span class="big">🌍</span>
+      <div class="small" data-i18n="about_float">Every trip is a story.</div>
+    </div>
+  </div>
+  <div class="about-text reveal-right">
+    <div class="eyebrow" data-i18n="about_label">Our story</div>
+    <h2 class="section-title">We built the travel companion <em data-i18n="about_em">we wished existed.</em></h2>
+    <p data-i18n="about_p1">It started on a family trip. The kids had been looking forward to it for weeks — and then, somewhere between the flight and the first museum, the excitement faded. They weren't bored because they didn't care. They were bored because no one had given them a role in the story.</p>
+    <p data-i18n="about_p2">Travel is one of the most powerful things you can do for a child's development. It builds empathy, curiosity, and a sense of wonder. But only if kids are actually present for it.</p>
+    <div class="values">
+      <div class="value">
+        <div class="value-dot"></div>
+        <div class="value-text"><strong data-i18n="val1_title">Curiosity over consumption</strong><br><span data-i18n="val1_desc">We want kids asking questions, not just ticking sights off a list.</span></div>
+      </div>
+      <div class="value">
+        <div class="value-dot"></div>
+        <div class="value-text"><strong data-i18n="val2_title">Stories over souvenirs</strong><br><span data-i18n="val2_desc">The best thing you can bring home is a memory.</span></div>
+      </div>
+      <div class="value">
+        <div class="value-dot"></div>
+        <div class="value-text"><strong data-i18n="val3_title">Adventure for every family</strong><br><span data-i18n="val3_desc">You don't need to go far to explore.</span></div>
+      </div>
+    </div>
+    <a href="#catalogue" class="btn btn-gold" data-i18n="about_cta">Start their adventure</a>
+  </div>
+</section>
+
+<!-- ─── NEWSLETTER ─── -->
+<section class="newsletter">
+  <div class="newsletter-inner">
+    <div class="eyebrow reveal" style="color:var(--teal-lt)" data-i18n="nl_label">Stay in the loop</div>
+    <h2 class="reveal delay-1" data-i18n="nl_title">New destinations, exclusive discounts & family travel tips</h2>
+    <p class="reveal delay-2" data-i18n="nl_sub">Join 2,000+ families already exploring with Tiny Planet.</p>
+    <form class="newsletter-form reveal delay-3" onsubmit="return false">
+      <input type="email" placeholder="Your email address" data-i18n-placeholder="nl_email">
+      <button type="submit" class="btn btn-gold" style="white-space:nowrap;padding:14px 28px;font-size:14px" data-i18n="nl_btn">Subscribe</button>
+    </form>
+    <p class="newsletter-note reveal delay-4" data-i18n="nl_note">No spam. Unsubscribe anytime.</p>
+  </div>
+</section>
+
+<!-- ─── CTA BAND ─── -->
+<section class="cta-band">
+  <h2 class="reveal" data-i18n="cta_title">The gift every family needs<br>before their next trip.</h2>
+  <p class="reveal delay-1" data-i18n="cta_sub">Works for any destination. Perfect for ages 6–12. Ships worldwide.</p>
+  <div class="cta-band-actions reveal delay-2">
+    <a href="#catalogue" class="btn btn-white" data-i18n="cta_btn1">Shop all passports</a>
+    <a href="#how-it-works" class="btn btn-ghost-white" data-i18n="cta_btn2">See how it works</a>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div style="display:flex;align-items:center;gap:0">
+        <span style="font-family:'Baloo 2',sans-serif;font-weight:800;font-size:22px;color:#fff">tiny</span>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 270" height="36">
+          <defs><clipPath id="fp"><circle cx="150" cy="130" r="86"/></clipPath><clipPath id="ff"><circle cx="150" cy="130" r="91"/></clipPath></defs>
+          <circle cx="150" cy="130" r="86" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="13"/>
+          <g transform="rotate(-18 150 130)"><path d="M18 130a132 44 0 1 0 264 0a132 44 0 1 0-264 0ZM42 130a108 27 0 1 1 216 0a108 27 0 1 1-216 0Z" fill="#F6A623" fill-rule="evenodd" stroke="rgba(255,255,255,.15)" stroke-width="5"/></g>
+          <circle cx="150" cy="130" r="86" fill="#F6B12B"/>
+          <g clip-path="url(#fp)"><circle cx="150" cy="130" r="86" fill="#E49020"/><circle cx="141" cy="118" r="86" fill="#F6B12B"/></g>
+          <circle cx="150" cy="130" r="86" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="5"/>
+          <text x="150" y="130" font-family="'Baloo 2',sans-serif" font-weight="800" font-size="140" text-anchor="middle" dominant-baseline="central" fill="#FBF3DC">T</text>
+          <g transform="rotate(-18 150 130)" clip-path="url(#ff)"><path d="M18 130A132 44 0 0 0 282 130L258 130A108 27 0 0 1 42 130Z" fill="#F6A623" stroke="rgba(255,255,255,.12)" stroke-width="5"/></g>
+        </svg>
+        <span style="font-family:'Baloo 2',sans-serif;font-weight:800;font-size:22px;color:#fff">planet</span>
+      </div>
+      <p data-i18n="footer_brand">Turning family travel into adventures kids will remember for a lifetime.</p>
+      <div class="footer-langs">
+        <span class="footer-lang-tag">CA</span><span class="footer-lang-tag">ES</span><span class="footer-lang-tag">EN</span>
+        <span class="footer-lang-tag">FR</span><span class="footer-lang-tag">DE</span><span class="footer-lang-tag">IT</span>
+        <span class="footer-lang-tag">NL</span><span class="footer-lang-tag">PT</span><span class="footer-lang-tag">JA</span><span class="footer-lang-tag">ZH</span>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4 data-i18n="footer_shop_h">Shop</h4>
+      <ul>
+        <li><a href="#catalogue" data-i18n="footer_shop_1">All passports</a></li>
+        <li><a href="#" data-i18n="footer_shop_2">Sticker packs</a></li>
+        <li><a href="#" data-i18n="footer_shop_3">Gift cards</a></li>
+        <li><a href="#" data-i18n="footer_shop_4">Bundle deals</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4 data-i18n="footer_info_h">Info</h4>
+      <ul>
+        <li><a href="#how-it-works" data-i18n="footer_info_1">How it works</a></li>
+        <li><a href="#about" data-i18n="footer_info_2">About us</a></li>
+        <li><a href="#" data-i18n="footer_info_3">For retailers</a></li>
+        <li><a href="#" data-i18n="footer_info_4">Press kit</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4 data-i18n="footer_help_h">Help</h4>
+      <ul>
+        <li><a href="#" data-i18n="footer_help_1">FAQ</a></li>
+        <li><a href="#" data-i18n="footer_help_2">Shipping</a></li>
+        <li><a href="#" data-i18n="footer_help_3">Contact us</a></li>
+        <li><a href="#" data-i18n="footer_help_4">Instagram</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-tagline" data-i18n="footer_tagline">Every trip is a story. Make sure they remember it.</div>
+    <div class="footer-copy">© 2026 Tiny Planet. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+/* ── BOOKS DATA ── */
+const books = [
+  {id:1,country:'Japan',emoji:'🇯🇵',flag:'🗾',region:'asia',price:19,ages:['6-9','10-12'],isNew:true,duration:'Weekend & Week+',img:'images/Japan_En.png',imgLangs:{en:'images/Japan_En.png',ca:'images/Japan_CA.png'}},
+  {id:2,country:'Italy',emoji:'🇮🇹',flag:'🍕',region:'europe',price:17,ages:['6-9','10-12'],isNew:true,duration:'Weekend & Week+',img:'images/Italy_EN.png',imgLangs:{en:'images/Italy_EN.png',es:'images/Italy_ES.png',de:'images/Italy_DE.png',ca:'images/Italy_CA.png'}},
+  {id:3,country:'Australia',emoji:'🇦🇺',flag:'🦘',region:'oceania',price:19,ages:['6-9','10-12'],isNew:false,duration:'Week+'},
+  {id:4,country:'Brazil',emoji:'🇧🇷',flag:'🌴',region:'americas',price:17,ages:['6-9','10-12'],isNew:false,duration:'Weekend & Week+'},
+  {id:5,country:'Indonesia',emoji:'🇮🇩',flag:'🌺',region:'asia',price:17,ages:['6-9','10-12'],isNew:false,duration:'Week+'},
+  {id:6,country:'France',emoji:'🇫🇷',flag:'🗼',region:'europe',price:17,ages:['6-9','10-12'],isNew:false,duration:'Weekend & Week+',img:'images/France_EN.png',imgLangs:{en:'images/France_EN.png'}},
+  {id:7,country:'Morocco',emoji:'🇲🇦',flag:'🕌',region:'africa',price:17,ages:['6-9','10-12'],isNew:false,duration:'Week+'},
+  {id:8,country:'Mexico',emoji:'🇲🇽',flag:'🌮',region:'americas',price:17,ages:['6-9','10-12'],isNew:false,duration:'Weekend & Week+'},
+  {id:9,country:'Greece',emoji:'🇬🇷',flag:'🏛️',region:'europe',price:17,ages:['6-9','10-12'],isNew:false,duration:'Week+'},
+  {id:10,country:'Kenya',emoji:'🇰🇪',flag:'🦁',region:'africa',price:19,ages:['6-9','10-12'],isNew:true,duration:'Week+'},
+  {id:11,country:'India',emoji:'🇮🇳',flag:'🕍',region:'asia',price:17,ages:['6-9','10-12'],isNew:false,duration:'Week+'},
+  {id:12,country:'Portugal',emoji:'🇵🇹',flag:'🐟',region:'europe',price:17,ages:['6-9','10-12'],isNew:false,duration:'Weekend & Week+'},
+  {id:13,country:'Thailand',emoji:'🇹🇭',flag:'🐘',region:'asia',price:17,ages:['6-9','10-12'],isNew:false,duration:'Week+'},
+  {id:14,country:'Sri Lanka',emoji:'🇱🇰',flag:'🌿',region:'asia',price:17,ages:['6-9','10-12'],isNew:false,duration:'Week+'},
+  {id:15,country:'China',emoji:'🇨🇳',flag:'🐉',region:'asia',price:19,ages:['6-9','10-12'],isNew:false,duration:'Week+'},
+  {id:16,country:'Peru',emoji:'🇵🇪',flag:'🦙',region:'americas',price:17,ages:['6-9','10-12'],isNew:false,duration:'Week+'},
+  {id:17,country:'Netherlands',emoji:'🇳🇱',flag:'🌷',region:'europe',price:17,ages:['6-9','10-12'],isNew:false,duration:'Weekend'},
+  {id:18,country:'South Africa',emoji:'🇿🇦',flag:'🦒',region:'africa',price:19,ages:['6-9','10-12'],isNew:false,duration:'Week+'},
+  {id:19,country:'Canada',emoji:'🇨🇦',flag:'🍁',region:'americas',price:17,ages:['6-9','10-12'],isNew:false,duration:'Week+'},
+  {id:20,country:'Spain',emoji:'🇪🇸',flag:'🥘',region:'europe',price:17,ages:['6-9','10-12'],isNew:false,duration:'Weekend & Week+'},
+  {id:21,country:'Vietnam',emoji:'🇻🇳',flag:'🍜',region:'asia',price:17,ages:['6-9','10-12'],soon:true,duration:'Week+'},
+  {id:22,country:'Colombia',emoji:'🇨🇴',flag:'☕',region:'americas',price:17,ages:['6-9','10-12'],soon:true,duration:'Week+'},
+  {id:23,country:'Egypt',emoji:'🇪🇬',flag:'🏺',region:'africa',price:19,ages:['6-9','10-12'],soon:true,duration:'Week+'},
+  {id:24,country:'Norway',emoji:'🇳🇴',flag:'🏔️',region:'europe',price:17,ages:['6-9','10-12'],soon:true,duration:'Week+'},
+];
+
+let activeRegion = 'all';
+let cartItems = [];
+
+function renderBooks(list) {
+  const grid = document.getElementById('booksGrid');
+  grid.innerHTML = list.length === 0
+    ? '<p style="color:var(--muted);font-size:16px;grid-column:1/-1;padding:24px 0">No passports found for that search.</p>'
+    : list.map(b => `
+    <div class="passport-card" data-id="${b.id}" data-region="${b.region}" onclick="openPDP(${b.id})" style="cursor:pointer">
+      <div class="passport-img">
+        ${b.img
+          ? `<img src="${(b.imgLangs && b.imgLangs[currentLang]) || b.img}" alt="${b.country} passport" style="width:100%;height:100%;object-fit:cover;display:block">`
+          : `<div class="passport-img-placeholder"><div class="country-emoji">${b.emoji}</div><div class="country-name-big">${b.country}</div></div>`
+        }
+        ${b.isNew ? '<div class="book-badge-new">New</div>' : ''}
+        ${b.soon ? '<div class="book-badge-soon">Coming soon</div>' : ''}
+      </div>
+      <div class="book-info">
+        <div class="book-country">${b.country}</div>
+        <div class="book-meta">${b.duration}</div>
+        <div class="book-price" style="margin-bottom:12px"><span style="font-size:11px;font-weight:600;opacity:.7">${(T[currentLang]||T.en).from_price||'From'} </span>€19.99</div>
+        ${b.soon
+          ? `<button class="book-add" style="background:var(--muted);cursor:default" onclick="event.stopPropagation()">Notify me</button>`
+          : `<button class="book-add" onclick="event.stopPropagation();openPDP(${b.id})">View passport</button>`
+        }
+      </div>
+    </div>`).join('');
+}
+
+function filterCat(region, btn) {
+  activeRegion = region;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  filterBooks();
+}
+
+function filterBooks() {
+  const q = document.getElementById('bookSearch').value.toLowerCase();
+  const filtered = books.filter(b => {
+    const regionMatch = activeRegion === 'all' || b.region === activeRegion;
+    const searchMatch = b.country.toLowerCase().includes(q);
+    return regionMatch && searchMatch;
+  });
+  renderBooks(filtered);
+}
+
+/* ── CART ── */
+function addToCart(id, priceOverride) {
+  const book = books.find(b=>b.id===id);
+  if(!book||book.soon) return;
+  const price = priceOverride || book.price;
+  const key = id + '-' + price;
+  const existing = cartItems.find(i=>i.key===key);
+  if(existing) existing.qty++;
+  else cartItems.push({...book, price, key, qty:1});
+  updateCartUI();
+  openCart();
+}
+
+function removeFromCart(key) {
+  cartItems = cartItems.filter(i=>i.key!==key);
+  updateCartUI();
+}
+
+function updateCartUI() {
+  const total = cartItems.reduce((s,i)=>s+i.price*i.qty,0);
+  const count = cartItems.reduce((s,i)=>s+i.qty,0);
+  document.querySelector('[data-i18n="nav_cart"]').textContent = `🛒 Cart (${count})`;
+  const body = document.getElementById('cartBody');
+  const footer = document.getElementById('cartFooter');
+  if(cartItems.length === 0) {
+    body.innerHTML = '<div class="cart-empty"><span style="font-size:36px">🌍</span><span>Your cart is empty</span></div>';
+    footer.style.display = 'none';
+  } else {
+    body.innerHTML = cartItems.map(i=>`
+      <div class="cart-item">
+        <div class="cart-item-img">${i.emoji}</div>
+        <div class="cart-item-info">
+          <div class="cart-item-name">${i.country} Passport</div>
+          <div class="cart-item-sub">Qty: ${i.qty}</div>
+        </div>
+        <div class="cart-item-price">€${(i.price*i.qty).toFixed(2)}</div>
+        <button class="cart-item-remove" onclick="removeFromCart('${i.key}')">✕</button>
+      </div>`).join('');
+    document.getElementById('cartTotal').textContent = `€${total.toFixed(2)}`;
+    footer.style.display = 'block';
+  }
+}
+
+function openCart(){document.getElementById('cartOverlay').classList.add('open');document.getElementById('cartDrawer').classList.add('open')}
+function closeCart(){document.getElementById('cartOverlay').classList.remove('open');document.getElementById('cartDrawer').classList.remove('open')}
+
+/* ── NAV SCROLL ── */
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('scrolled',window.scrollY>40);
+});
+
+/* ── MOBILE MENU ── */
+function openMobileMenu(){document.getElementById('mobileMenu').classList.add('open')}
+function closeMobileMenu(){document.getElementById('mobileMenu').classList.remove('open')}
+
+/* ── LANG DROPDOWN ── */
+function toggleLang(){document.getElementById('langDropdown').classList.toggle('open')}
+document.addEventListener('click',e=>{
+  if(!e.target.closest('.lang-wrap')) document.getElementById('langDropdown').classList.remove('open');
+});
+
+/* ── TRANSLATIONS ── */
+const T = {
+  en:{
+    nav_how:'How it works',nav_books:'Adventure Passports',nav_about:'Our Story',nav_shop:'Shop Now',nav_cart:'🛒 Cart (0)',
+    hero_h1a:'Passport to the whole world.',hero_h1b:'One adventure at a time.',
+    hero_sub:'Tiny Planet adventure passports turn family travel into a game, a story, and a memory your kids will keep forever.',
+    hero_cta1:'Shop Adventure Passports',hero_cta2:'See how it works',
+    from_price:'From',week_1_2:'1–2 weeks',week_3_4:'3–4+ weeks',duration_label:'Trip length',
+    trust_countries:'Countries',trust_langs:'Languages',trust_ships:'Ships worldwide',
+    problem_text:'You\'ve planned the perfect trip. But somewhere between the airport and the museum, the kids lose interest. Three months later, the thing they remember most? <strong>The hotel pool.</strong> Travel is one of the greatest gifts you can give your child. Tiny Planet makes sure they actually experience it.',
+    how_label:'How it works',how_title:'Your kid becomes the explorer.<br>You become the hero parent.',how_sub:'Three phases that turn any family holiday into an adventure they\'ll talk about for years.',
+    step1_num:'Step 01',step1_title:'Before the trip',step1_desc:'Open the guide at home. Read about the history, culture, animals, and local food. Set up your Explorer profile and choose your mission goals. The excitement starts before you even pack.',
+    step2_num:'Step 02',step2_title:'During the trip',step2_desc:'Complete daily challenges, answer quizzes, spot local curiosities, and journal every discovery in real time. Every day is a new level to unlock.',
+    step3_num:'Step 03',step3_title:'After the trip',step3_desc:'Fill the final pages with photos, drawings, and memories. Earn stamps, complete the sticker collection, and discover your Explorer rank. The adventure lives on.',
+    quote1:'"The kids were engaged, curious, and actually talking to us about what they were seeing."',quote1_attr:'— Claire M., Dublin',
+    feat_label:'What\'s inside',feat_title:'One guide.<br>A whole world of discovery.',feat_sub:'Everything designed to keep curious minds engaged — before, during, and after every trip.',
+    feat1_title:'Cultural deep dives',feat1_desc:'Age-appropriate history, geography, and curiosities. Written to spark questions, not end them.',
+    feat2_title:'Games & challenges',feat2_desc:'Scavenger hunts, observation tasks, and local missions that turn sightseeing into an adventure.',
+    feat3_title:'Quizzes & trivia',feat3_desc:'Fun questions that make kids want to learn — and show off what they know.',
+    feat4_title:'Journaling pages',feat4_desc:'Guided prompts and free space to draw, write, and stick. Their trip, in their own words.',
+    feat5_title:'Explorer levels',feat5_desc:'Earn ranks and achievement stamps. A gamification system built for curious minds.',
+    feat6_title:'Sticker collection',feat6_desc:'Places, foods, animals, and transport to collect across every trip.',
+    cat_label:'Adventure Passports',cat_title:'Choose your next destination',cat_search:'Search country…',
+    filter_all:'All',filter_europe:'Europe',filter_asia:'Asia',filter_americas:'Americas',filter_africa:'Africa',filter_oceania:'Oceania',
+    test_label:'What families say',test_title:'They came home different.',
+    t1:'"My daughter carried it everywhere. She was pointing things out to us, asking questions, filling in pages at dinner. Best €20 we spent on the whole trip."',
+    t2:'"We\'ve done three trips now with Tiny Planet. Our son says he doesn\'t want to travel without it."',
+    t3:'"It completely changed the dynamic. The kids were engaged, curious, and actually talking to us about what they were seeing."',
+    about_label:'Our story',about_em:'we wished existed.',
+    about_p1:'It started on a family trip. The kids had been looking forward to it for weeks — and then, somewhere between the flight and the first museum, the excitement faded. They weren\'t bored because they didn\'t care. They were bored because no one had given them a role in the story.',
+    about_p2:'Travel is one of the most powerful things you can do for a child\'s development. It builds empathy, curiosity, and a sense of wonder. But only if kids are actually present for it.',
+    about_float:'Every trip is a story.',
+    val1_title:'Curiosity over consumption',val1_desc:'We want kids asking questions, not just ticking sights off a list.',
+    val2_title:'Stories over souvenirs',val2_desc:'The best thing you can bring home is a memory.',
+    val3_title:'Adventure for every family',val3_desc:'You don\'t need to go far to explore.',
+    about_cta:'Start their adventure',
+    nl_label:'Stay in the loop',nl_title:'New destinations, exclusive discounts & family travel tips',nl_sub:'Join 2,000+ families already exploring with Tiny Planet.',nl_email:'Your email address',nl_btn:'Subscribe',nl_note:'No spam. Unsubscribe anytime.',
+    cta_title:'The gift every family needs<br>before their next trip.',cta_sub:'Works for any destination. Ships worldwide.',cta_btn1:'Shop all passports',cta_btn2:'See how it works',
+    footer_brand:'Turning family travel into adventures kids will remember for a lifetime.',
+    footer_shop_h:'Shop',footer_shop_1:'All passports',footer_shop_2:'Sticker packs',footer_shop_3:'Gift cards',footer_shop_4:'Bundle deals',
+    footer_info_h:'Info',footer_info_1:'How it works',footer_info_2:'About us',footer_info_3:'For retailers',footer_info_4:'Press kit',
+    footer_help_h:'Help',footer_help_1:'FAQ',footer_help_2:'Shipping',footer_help_3:'Contact us',footer_help_4:'Instagram',
+    footer_tagline:'Every trip is a story. Make sure they remember it.',
+    cart_title:'Your Cart',cart_empty:'Your cart is empty',cart_total:'Total',cart_checkout:'Checkout',
+  },
+  ca:{
+    nav_how:'Com funciona',nav_books:'Passaports d\'Aventura',nav_about:'La Nostra Història',nav_shop:'Comprar',nav_cart:'🛒 Cistella (0)',
+    hero_h1a:'Passaport per a tot el món.',hero_h1b:'Una aventura alhora.',
+    hero_sub:'Els passaports d\'aventura Tiny Planet converteixen els viatges en família en un joc, una història i un record que guardaran per sempre.',
+    hero_cta1:'Comprar passaports',hero_cta2:'Com funciona',
+    from_price:'Des de',week_1_2:'1–2 setmanes',week_3_4:'3–4+ setmanes',duration_label:'Durada del viatge',
+    trust_countries:'Destins',trust_langs:'Idiomes',trust_ships:'Enviament mundial',
+    problem_text:'Heu planejat el viatge perfecte. Però en algun moment entre l\'aeroport i el museu, els nens perden l\'interès. Tres mesos més tard, el que recorden més? <strong>La piscina de l\'hotel.</strong> Viatjar és un dels regals més grans que podeu fer als vostres fills. Tiny Planet s\'assegura que ho visquin de veritat.',
+    how_label:'Com funciona',how_title:'El teu fill es converteix en explorador.<br>Tu et converteixes en l\'heroi.',
+    how_sub:'Tres fases que convertiran qualsevol viatge familiar en una aventura de la qual parlaran durant anys.',
+    step1_num:'Pas 01',step1_title:'Abans del viatge',step1_desc:'Obriu la guia a casa. Llegiu la història, la cultura, els animals i el menjar local. Creeu el vostre perfil d\'Explorador i trieu els vostres objectius. L\'emoció comença abans de fer les maletes.',
+    step2_num:'Pas 02',step2_title:'Durant el viatge',step2_desc:'Completeu reptes diaris, responeu qüestionaris, descobriu curiositats locals i apunteu cada descoberta en temps real. Cada dia és un nou nivell per desbloquejar.',
+    step3_num:'Pas 03',step3_title:'Després del viatge',step3_desc:'Ompliu les últimes pàgines amb fotos, dibuixos i records. Guanyeu segells, completeu la col·lecció d\'adhesius i descobriu el vostre rang d\'Explorador. L\'aventura continua.',
+    quote1:'"Els nens estaven implicats, curiosos i realment ens parlaven del que veien."',quote1_attr:'— Claire M., Dublín',
+    feat_label:'Què hi ha dins',feat_title:'Un passaport.<br>Tot un món per descobrir.',feat_sub:'Tot dissenyat per mantenir les ments curioses actives — abans, durant i després de cada viatge.',
+    feat1_title:'Immersió cultural',feat1_desc:'Història, geografia i curiositats adaptades a l\'edat. Dissenyades per generar preguntes, no per acabar-les.',
+    feat2_title:'Jocs i reptes',feat2_desc:'Gimcanes, tasques d\'observació i missions locals que converteixen el turisme en una aventura.',
+    feat3_title:'Qüestionaris i trivia',feat3_desc:'Preguntes divertides que fan que els nens vulguin aprendre — i presumir del que saben.',
+    feat4_title:'Pàgines de diari',feat4_desc:'Indicacions guiades i espai lliure per dibuixar, escriure i enganxar. El seu viatge, en les seves pròpies paraules.',
+    feat5_title:'Nivells d\'Explorador',feat5_desc:'Guanya rangs i segells d\'assoliment. Un sistema de gamificació per a ments curioses.',
+    feat6_title:'Col·lecció d\'adhesius',feat6_desc:'Llocs, menjars, animals i transports per col·leccionar en cada viatge.',
+    cat_label:'Passaports d\'Aventura',cat_title:'Tria la teva pròxima aventura',cat_search:'Cerca un país…',
+    filter_all:'Tots',filter_europe:'Europa',filter_asia:'Àsia',filter_americas:'Amèriques',filter_africa:'Àfrica',filter_oceania:'Oceania',
+    test_label:'Què diuen les famílies',test_title:'Van tornar a casa canviats.',
+    t1:'"La meva filla el portava a tot arreu. Ens assenyalava coses, feia preguntes, omplia pàgines durant el sopar. Els millors €20 de tot el viatge."',
+    t2:'"Ja hem fet tres viatges amb Tiny Planet. El nostre fill diu que no vol viatjar sense ell."',
+    t3:'"Va canviar completament la dinàmica. Els nens estaven implicats, curiosos i realment ens parlaven del que veien."',
+    about_label:'La nostra història',about_em:'que desitjàvem que existís.',
+    about_p1:'Tot va començar en un viatge familiar. Els nens ho esperaven feia setmanes — i llavors, en algun punt entre el vol i el primer museu, l\'entusiasme es va esvair. No s\'avorriren perquè no els importés. S\'avorriren perquè ningú no els havia donat un paper en la història.',
+    about_p2:'Viatjar és una de les coses més poderoses que podeu fer per al desenvolupament d\'un nen. Construeix empatia, curiositat i sentit de la meravella. Però només si els nens hi estan realment presents.',
+    about_float:'Cada viatge és una història.',about_cta:'Inicia la seva aventura',
+    val1_title:'Curiositat per sobre del consum',val1_desc:'Volem nens que facin preguntes, no que simplement marquin llocs de la llista.',
+    val2_title:'Històries per sobre de records',val2_desc:'El millor que podeu portar a casa és un record.',
+    val3_title:'Aventura per a totes les famílies',val3_desc:'No cal anar lluny per explorar.',
+    nl_label:'Mantén-te informat',nl_title:'Nous destins, descomptes exclusius i consells de viatge familiar',nl_sub:'Uneix-te a més de 2.000 famílies que ja exploren amb Tiny Planet.',nl_email:'La teva adreça de correu',nl_btn:'Subscriu-te',nl_note:'Sense spam. Cancel·la quan vulguis.',
+    cta_title:'El regal que tota família necessita<br>abans del seu proper viatge.',cta_sub:'Funciona per a qualsevol destinació. Enviament mundial.',cta_btn1:'Veure tots els passaports',cta_btn2:'Com funciona',
+    footer_brand:'Convertint els viatges familiars en aventures que els nens recordaran tota la vida.',
+    footer_shop_h:'Botiga',footer_shop_1:'Tots els passaports',footer_shop_2:'Paquets d\'adhesius',footer_shop_3:'Targetes de regal',footer_shop_4:'Packs combinats',
+    footer_info_h:'Informació',footer_info_1:'Com funciona',footer_info_2:'Sobre nosaltres',footer_info_3:'Per a minoristes',footer_info_4:'Premsa',
+    footer_help_h:'Ajuda',footer_help_1:'Preguntes freqüents',footer_help_2:'Enviament',footer_help_3:'Contacta\'ns',footer_help_4:'Instagram',
+    footer_tagline:'Cada viatge és una història. Assegura\'t que se\'n recordin.',
+    cart_title:'La teva cistella',cart_empty:'La teva cistella és buida',cart_total:'Total',cart_checkout:'Finalitzar compra',
+  },
+  es:{
+    nav_how:'Cómo funciona',nav_books:'Pasaportes de Aventura',nav_about:'Nuestra Historia',nav_shop:'Comprar',nav_cart:'🛒 Carrito (0)',
+    hero_h1a:'Pasaporte para el mundo entero.',hero_h1b:'Una aventura a la vez.',
+    hero_sub:'Los pasaportes de aventura Tiny Planet convierten los viajes familiares en un juego, una historia y un recuerdo que guardarán para siempre.',
+    hero_cta1:'Comprar pasaportes',hero_cta2:'Cómo funciona',
+    from_price:'Desde',week_1_2:'1–2 semanas',week_3_4:'3–4+ semanas',duration_label:'Duración del viaje',
+    trust_countries:'Destinos',trust_langs:'Idiomas',trust_ships:'Envío mundial',
+    problem_text:'Has planeado el viaje perfecto. Pero en algún momento entre el aeropuerto y el museo, los niños pierden el interés. Tres meses después, ¿qué es lo que más recuerdan? <strong>La piscina del hotel.</strong> Viajar es uno de los mejores regalos que puedes hacerles a tus hijos. Tiny Planet se asegura de que realmente lo vivan.',
+    how_label:'Cómo funciona',how_title:'Tu hijo se convierte en explorador.<br>Tú te conviertes en el héroe.',
+    how_sub:'Tres fases que convierten cualquier viaje familiar en una aventura de la que hablarán durante años.',
+    step1_num:'Paso 01',step1_title:'Antes del viaje',step1_desc:'Abre la guía en casa. Lee sobre la historia, la cultura, los animales y la comida local. Crea tu perfil de Explorador y elige tus objetivos. La emoción empieza antes de hacer las maletas.',
+    step2_num:'Paso 02',step2_title:'Durante el viaje',step2_desc:'Completa retos diarios, responde cuestionarios, descubre curiosidades locales y apunta cada descubrimiento en tiempo real. Cada día es un nuevo nivel por desbloquear.',
+    step3_num:'Paso 03',step3_title:'Después del viaje',step3_desc:'Rellena las últimas páginas con fotos, dibujos y recuerdos. Gana sellos, completa la colección de pegatinas y descubre tu rango de Explorador. La aventura continúa.',
+    quote1:'"Los niños estaban implicados, curiosos y realmente nos hablaban de lo que veían."',quote1_attr:'— Claire M., Dublín',
+    feat_label:'Qué hay dentro',feat_title:'Un pasaporte.<br>Todo un mundo por descubrir.',feat_sub:'Todo diseñado para mantener las mentes curiosas activas — antes, durante y después de cada viaje.',
+    feat1_title:'Inmersión cultural',feat1_desc:'Historia, geografía y curiosidades adaptadas a la edad. Diseñadas para generar preguntas, no para acabarlas.',
+    feat2_title:'Juegos y retos',feat2_desc:'Gymkhanas, tareas de observación y misiones locales que convierten el turismo en una aventura.',
+    feat3_title:'Cuestionarios y trivia',feat3_desc:'Preguntas divertidas que hacen que los niños quieran aprender — y presumir de lo que saben.',
+    feat4_title:'Páginas de diario',feat4_desc:'Indicaciones guiadas y espacio libre para dibujar, escribir y pegar. Su viaje, en sus propias palabras.',
+    feat5_title:'Niveles de Explorador',feat5_desc:'Gana rangos y sellos de logros. Un sistema de gamificación para mentes curiosas.',
+    feat6_title:'Colección de pegatinas',feat6_desc:'Lugares, comidas, animales y transportes para coleccionar en cada viaje.',
+    cat_label:'Pasaportes de Aventura',cat_title:'Elige tu próxima aventura',cat_search:'Buscar país…',
+    filter_all:'Todos',filter_europe:'Europa',filter_asia:'Asia',filter_americas:'Américas',filter_africa:'África',filter_oceania:'Oceanía',
+    test_label:'Qué dicen las familias',test_title:'Volvieron a casa diferentes.',
+    t1:'"Mi hija lo llevaba a todas partes. Nos señalaba cosas, hacía preguntas, rellenaba páginas durante la cena. Los mejores €20 de todo el viaje."',
+    t2:'"Ya hemos hecho tres viajes con Tiny Planet. Nuestro hijo dice que no quiere viajar sin él."',
+    t3:'"Cambió completamente la dinámica. Los niños estaban implicados, curiosos y realmente nos hablaban de lo que veían."',
+    about_label:'Nuestra historia',about_em:'que deseábamos que existiera.',
+    about_p1:'Todo empezó en un viaje familiar. Los niños lo esperaban desde hacía semanas — y luego, en algún punto entre el vuelo y el primer museo, la emoción se desvaneció. No se aburrieron porque no les importara. Se aburrieron porque nadie les había dado un papel en la historia.',
+    about_p2:'Viajar es una de las cosas más poderosas que puedes hacer por el desarrollo de un niño. Construye empatía, curiosidad y sentido de la maravilla. Pero solo si los niños están realmente presentes.',
+    about_float:'Cada viaje es una historia.',about_cta:'Empieza su aventura',
+    val1_title:'Curiosidad sobre consumo',val1_desc:'Queremos niños que hagan preguntas, no que simplemente marquen lugares de una lista.',
+    val2_title:'Historias sobre souvenirs',val2_desc:'Lo mejor que puedes traer a casa es un recuerdo.',
+    val3_title:'Aventura para todas las familias',val3_desc:'No hace falta ir lejos para explorar.',
+    nl_label:'Mantente informado',nl_title:'Nuevos destinos, descuentos exclusivos y consejos de viaje familiar',nl_sub:'Únete a más de 2.000 familias que ya exploran con Tiny Planet.',nl_email:'Tu dirección de correo',nl_btn:'Suscribirse',nl_note:'Sin spam. Cancela cuando quieras.',
+    cta_title:'El regalo que toda familia necesita<br>antes de su próximo viaje.',cta_sub:'Funciona para cualquier destino. Envío mundial.',cta_btn1:'Ver todos los pasaportes',cta_btn2:'Cómo funciona',
+    footer_brand:'Convirtiendo los viajes familiares en aventuras que los niños recordarán toda la vida.',
+    footer_shop_h:'Tienda',footer_shop_1:'Todos los pasaportes',footer_shop_2:'Packs de pegatinas',footer_shop_3:'Tarjetas regalo',footer_shop_4:'Packs combinados',
+    footer_info_h:'Información',footer_info_1:'Cómo funciona',footer_info_2:'Sobre nosotros',footer_info_3:'Para minoristas',footer_info_4:'Prensa',
+    footer_help_h:'Ayuda',footer_help_1:'Preguntas frecuentes',footer_help_2:'Envíos',footer_help_3:'Contáctanos',footer_help_4:'Instagram',
+    footer_tagline:'Cada viaje es una historia. Asegúrate de que la recuerden.',
+    cart_title:'Tu carrito',cart_empty:'Tu carrito está vacío',cart_total:'Total',cart_checkout:'Finalizar compra',
+  },
+  fr:{
+    nav_how:'Comment ça marche',nav_books:'Passeports d\'Aventure',nav_about:'Notre Histoire',nav_shop:'Boutique',nav_cart:'🛒 Panier (0)',
+    hero_h1a:'Un passeport pour le monde entier.',hero_h1b:'Une aventure à la fois.',
+    hero_sub:'Les passeports d\'aventure Tiny Planet transforment les voyages en famille en un jeu, une histoire et un souvenir inoubliable.',
+    hero_cta1:'Voir les passeports',hero_cta2:'Comment ça marche',
+    from_price:'À partir de',week_1_2:'1–2 semaines',week_3_4:'3–4+ semaines',duration_label:'Durée du voyage',
+    trust_countries:'Destinations',trust_langs:'Langues',trust_ships:'Livraison mondiale',
+    problem_text:'Vous avez planifié le voyage parfait. Mais quelque part entre l\'aéroport et le musée, les enfants perdent leur intérêt. Trois mois plus tard, ce dont ils se souviennent le plus ? <strong>La piscine de l\'hôtel.</strong> Voyager est l\'un des plus beaux cadeaux que vous puissiez offrir à vos enfants. Tiny Planet s\'assure qu\'ils le vivent vraiment.',
+    how_label:'Comment ça marche',how_title:'Votre enfant devient l\'explorateur.<br>Vous devenez le héros.',
+    how_sub:'Trois phases qui transforment n\'importe quel voyage en famille en une aventure dont ils parleront pendant des années.',
+    step1_num:'Étape 01',step1_title:'Avant le voyage',step1_desc:'Ouvrez le guide à la maison. Lisez l\'histoire, la culture, les animaux et la gastronomie locale. Créez votre profil d\'Explorateur et choisissez vos objectifs. L\'excitation commence avant même de faire les valises.',
+    step2_num:'Étape 02',step2_title:'Pendant le voyage',step2_desc:'Relevez des défis quotidiens, répondez à des quiz, découvrez des curiosités locales et notez chaque découverte en temps réel. Chaque journée est un nouveau niveau à débloquer.',
+    step3_num:'Étape 03',step3_title:'Après le voyage',step3_desc:'Remplissez les dernières pages avec des photos, des dessins et des souvenirs. Gagnez des tampons, complétez la collection d\'autocollants et découvrez votre rang d\'Explorateur. L\'aventure continue.',
+    quote1:'"Les enfants étaient engagés, curieux et nous parlaient vraiment de ce qu\'ils voyaient."',quote1_attr:'— Claire M., Dublin',
+    feat_label:'Ce qu\'il y a dedans',feat_title:'Un passeport.<br>Tout un monde à découvrir.',feat_sub:'Tout conçu pour garder les esprits curieux actifs — avant, pendant et après chaque voyage.',
+    feat1_title:'Plongées culturelles',feat1_desc:'Histoire, géographie et curiosités adaptées à l\'âge. Conçues pour susciter des questions, pas pour les clore.',
+    feat2_title:'Jeux et défis',feat2_desc:'Chasses au trésor, tâches d\'observation et missions locales qui transforment le tourisme en aventure.',
+    feat3_title:'Quiz et trivia',feat3_desc:'Des questions amusantes qui donnent aux enfants envie d\'apprendre — et de montrer ce qu\'ils savent.',
+    feat4_title:'Pages de journal',feat4_desc:'Invites guidées et espace libre pour dessiner, écrire et coller. Leur voyage, dans leurs propres mots.',
+    feat5_title:'Niveaux d\'Explorateur',feat5_desc:'Gagnez des rangs et des tampons de réussite. Un système de gamification pour les esprits curieux.',
+    feat6_title:'Collection d\'autocollants',feat6_desc:'Lieux, aliments, animaux et transports à collectionner lors de chaque voyage.',
+    cat_label:'Passeports d\'Aventure',cat_title:'Choisissez votre prochaine aventure',cat_search:'Rechercher un pays…',
+    filter_all:'Tous',filter_europe:'Europe',filter_asia:'Asie',filter_americas:'Amériques',filter_africa:'Afrique',filter_oceania:'Océanie',
+    test_label:'Ce que disent les familles',test_title:'Ils sont rentrés différents.',
+    t1:'"Ma fille l\'emportait partout. Elle nous montrait des choses, posait des questions, remplissait des pages pendant le dîner. Les meilleurs €20 de tout le voyage."',
+    t2:'"Nous avons déjà fait trois voyages avec Tiny Planet. Notre fils dit qu\'il ne veut pas voyager sans lui."',
+    t3:'"Cela a complètement changé la dynamique. Les enfants étaient engagés, curieux et nous parlaient vraiment de ce qu\'ils voyaient."',
+    about_label:'Notre histoire',about_em:'que nous aurions aimé voir exister.',
+    about_p1:'Tout a commencé lors d\'un voyage en famille. Les enfants l\'attendaient depuis des semaines — puis, quelque part entre le vol et le premier musée, l\'enthousiasme s\'est évanoui. Ils ne s\'ennuyaient pas parce qu\'ils ne s\'y intéressaient pas. Ils s\'ennuyaient parce que personne ne leur avait donné un rôle dans l\'histoire.',
+    about_p2:'Voyager est l\'une des choses les plus puissantes que vous puissiez faire pour le développement d\'un enfant. Cela construit l\'empathie, la curiosité et l\'émerveillement. Mais seulement si les enfants sont vraiment présents.',
+    about_float:'Chaque voyage est une histoire.',about_cta:'Commencez leur aventure',
+    val1_title:'Curiosité plutôt que consommation',val1_desc:'Nous voulons des enfants qui posent des questions, pas qui cochent des cases.',
+    val2_title:'Histoires plutôt que souvenirs',val2_desc:'La meilleure chose que vous puissiez ramener est un souvenir.',
+    val3_title:'Aventure pour toutes les familles',val3_desc:'Pas besoin d\'aller loin pour explorer.',
+    nl_label:'Restez informé',nl_title:'Nouvelles destinations, réductions exclusives et conseils de voyage',nl_sub:'Rejoignez plus de 2 000 familles qui explorent avec Tiny Planet.',nl_email:'Votre adresse e-mail',nl_btn:'S\'abonner',nl_note:'Pas de spam. Désinscription à tout moment.',
+    cta_title:'Le cadeau dont chaque famille a besoin<br>avant son prochain voyage.',cta_sub:'Fonctionne pour toute destination. Livraison mondiale.',cta_btn1:'Voir tous les passeports',cta_btn2:'Comment ça marche',
+    footer_brand:'Transformer les voyages en famille en aventures dont les enfants se souviendront toute leur vie.',
+    footer_shop_h:'Boutique',footer_shop_1:'Tous les passeports',footer_shop_2:'Packs d\'autocollants',footer_shop_3:'Cartes cadeaux',footer_shop_4:'Packs combinés',
+    footer_info_h:'Infos',footer_info_1:'Comment ça marche',footer_info_2:'À propos',footer_info_3:'Pour les revendeurs',footer_info_4:'Presse',
+    footer_help_h:'Aide',footer_help_1:'FAQ',footer_help_2:'Livraison',footer_help_3:'Nous contacter',footer_help_4:'Instagram',
+    footer_tagline:'Chaque voyage est une histoire. Assurez-vous qu\'ils s\'en souviennent.',
+    cart_title:'Votre panier',cart_empty:'Votre panier est vide',cart_total:'Total',cart_checkout:'Commander',
+  },
+  de:{
+    nav_how:'Wie es funktioniert',nav_books:'Abenteuer-Pässe',nav_about:'Unsere Geschichte',nav_shop:'Shop',nav_cart:'🛒 Warenkorb (0)',
+    hero_h1a:'Ein Pass für die ganze Welt.',hero_h1b:'Ein Abenteuer nach dem anderen.',
+    hero_sub:'Die Abenteuer-Pässe von Tiny Planet verwandeln Familienreisen in ein Spiel, eine Geschichte und eine unvergessliche Erinnerung.',
+    hero_cta1:'Pässe entdecken',hero_cta2:'Wie es funktioniert',
+    from_price:'Ab',week_1_2:'1–2 Wochen',week_3_4:'3–4+ Wochen',duration_label:'Reisedauer',
+    trust_countries:'Länder',trust_langs:'Sprachen',trust_ships:'Weltweiter Versand',
+    problem_text:'Ihr habt die perfekte Reise geplant. Aber irgendwann zwischen Flughafen und Museum verlieren die Kinder das Interesse. Drei Monate später, woran erinnern sie sich am meisten? <strong>Am Hotelpoolpool.</strong> Reisen ist eines der schönsten Geschenke, die ihr euren Kindern machen könnt. Tiny Planet stellt sicher, dass sie es wirklich erleben.',
+    how_label:'Wie es funktioniert',how_title:'Euer Kind wird zum Entdecker.<br>Ihr werdet zu den Helden.',
+    how_sub:'Drei Phasen, die jede Familienreise in ein Abenteuer verwandeln, über das sie noch jahrelang reden werden.',
+    step1_num:'Schritt 01',step1_title:'Vor der Reise',step1_desc:'Öffnet den Reisepass zu Hause. Lest über Geschichte, Kultur, Tiere und lokales Essen. Erstellt euer Entdecker-Profil und wählt eure Missionsziele. Die Aufregung beginnt vor dem Kofferpacken.',
+    step2_num:'Schritt 02',step2_title:'Während der Reise',step2_desc:'Erfüllt tägliche Herausforderungen, beantwortet Quizfragen, entdeckt lokale Kuriositäten und haltet jede Entdeckung in Echtzeit fest. Jeder Tag ist ein neues Level zum Freischalten.',
+    step3_num:'Schritt 03',step3_title:'Nach der Reise',step3_desc:'Füllt die letzten Seiten mit Fotos, Zeichnungen und Erinnerungen. Verdient Stempel, vervollständigt die Stickersammlung und entdeckt euren Entdecker-Rang. Das Abenteuer geht weiter.',
+    quote1:'"Die Kinder waren begeistert, neugierig und haben uns wirklich erzählt, was sie sahen."',quote1_attr:'— Claire M., Dublin',
+    feat_label:'Was drin ist',feat_title:'Ein Pass.<br>Eine ganze Welt zu entdecken.',feat_sub:'Alles darauf ausgelegt, neugierige Köpfe aktiv zu halten — vor, während und nach jeder Reise.',
+    feat1_title:'Kulturelle Entdeckungen',feat1_desc:'Altersgerechte Geschichte, Geografie und Kuriositäten. Geschrieben, um Fragen zu wecken, nicht um sie zu beenden.',
+    feat2_title:'Spiele & Herausforderungen',feat2_desc:'Schnitzeljagden, Beobachtungsaufgaben und lokale Missionen, die Sightseeing in ein Abenteuer verwandeln.',
+    feat3_title:'Quiz & Trivia',feat3_desc:'Spaßige Fragen, die Kinder dazu bringen, mehr lernen zu wollen — und ihr Wissen zu zeigen.',
+    feat4_title:'Tagebuchseiten',feat4_desc:'Geführte Aufgaben und freier Raum zum Zeichnen, Schreiben und Kleben. Ihre Reise, in ihren eigenen Worten.',
+    feat5_title:'Entdecker-Level',feat5_desc:'Verdiene Ränge und Leistungsstempel. Ein Gamification-System für neugierige Köpfe.',
+    feat6_title:'Stickersammlung',feat6_desc:'Orte, Essen, Tiere und Transportmittel, die auf jeder Reise gesammelt werden können.',
+    cat_label:'Abenteuer-Pässe',cat_title:'Wählt euer nächstes Abenteuer',cat_search:'Land suchen…',
+    filter_all:'Alle',filter_europe:'Europa',filter_asia:'Asien',filter_americas:'Amerika',filter_africa:'Afrika',filter_oceania:'Ozeanien',
+    test_label:'Was Familien sagen',test_title:'Sie kamen verändert zurück.',
+    t1:'"Unsere Tochter hatte es überall dabei. Sie zeigte uns Dinge, stellte Fragen, füllte beim Abendessen Seiten aus. Die besten €20 der ganzen Reise."',
+    t2:'"Wir haben jetzt drei Reisen mit Tiny Planet gemacht. Unser Sohn sagt, er will ohne ihn nicht mehr reisen."',
+    t3:'"Es hat die Dynamik komplett verändert. Die Kinder waren begeistert, neugierig und haben uns wirklich erzählt, was sie sahen."',
+    about_label:'Unsere Geschichte',about_em:'die wir uns gewünscht hätten.',
+    about_p1:'Alles begann auf einer Familienreise. Die Kinder hatten wochenlang darauf gewartet — und dann, irgendwo zwischen dem Flug und dem ersten Museum, verblasste die Begeisterung. Sie langweilten sich nicht, weil es ihnen egal war. Sie langweilten sich, weil niemand ihnen eine Rolle in der Geschichte gegeben hatte.',
+    about_p2:'Reisen ist eines der wirkungsvollsten Dinge, die ihr für die Entwicklung eines Kindes tun könnt. Es baut Empathie, Neugier und Staunen auf. Aber nur, wenn die Kinder wirklich dabei sind.',
+    about_float:'Jede Reise ist eine Geschichte.',about_cta:'Ihr Abenteuer starten',
+    val1_title:'Neugier statt Konsum',val1_desc:'Wir wollen Kinder, die Fragen stellen, nicht nur Sehenswürdigkeiten abhaken.',
+    val2_title:'Geschichten statt Souvenirs',val2_desc:'Das Beste, was ihr nach Hause bringen könnt, ist eine Erinnerung.',
+    val3_title:'Abenteuer für jede Familie',val3_desc:'Ihr müsst nicht weit fahren, um zu entdecken.',
+    nl_label:'Bleib auf dem Laufenden',nl_title:'Neue Ziele, exklusive Rabatte & Reisetipps für Familien',nl_sub:'Schließt euch über 2.000 Familien an, die mit Tiny Planet erkunden.',nl_email:'Eure E-Mail-Adresse',nl_btn:'Abonnieren',nl_note:'Kein Spam. Jederzeit abmelden.',
+    cta_title:'Das Geschenk, das jede Familie braucht,<br>bevor die nächste Reise beginnt.',cta_sub:'Funktioniert für jedes Reiseziel. Weltweiter Versand.',cta_btn1:'Alle Pässe ansehen',cta_btn2:'Wie es funktioniert',
+    footer_brand:'Familienreisen in Abenteuer verwandeln, an die sich Kinder ein Leben lang erinnern.',
+    footer_shop_h:'Shop',footer_shop_1:'Alle Pässe',footer_shop_2:'Sticker-Packs',footer_shop_3:'Geschenkkarten',footer_shop_4:'Kombi-Packs',
+    footer_info_h:'Info',footer_info_1:'Wie es funktioniert',footer_info_2:'Über uns',footer_info_3:'Für Händler',footer_info_4:'Presse',
+    footer_help_h:'Hilfe',footer_help_1:'FAQ',footer_help_2:'Versand',footer_help_3:'Kontakt',footer_help_4:'Instagram',
+    footer_tagline:'Jede Reise ist eine Geschichte. Stellt sicher, dass sie sich erinnern.',
+    cart_title:'Warenkorb',cart_empty:'Ihr Warenkorb ist leer',cart_total:'Gesamt',cart_checkout:'Zur Kasse',
+  },
+  ja:{
+    nav_how:'使い方',nav_books:'冒険パスポート',nav_about:'私たちについて',nav_shop:'購入',nav_cart:'🛒 カート (0)',
+    hero_h1a:'世界へのパスポート。',hero_h1b:'一度に一つの冒険。',
+    hero_sub:'Tiny Planetの冒険パスポートが、家族旅行をゲーム、物語、そして一生の思い出に変えます。',
+    hero_cta1:'パスポートを見る',hero_cta2:'使い方を見る',
+    from_price:'から',week_1_2:'1〜2週間',week_3_4:'3〜4週間以上',duration_label:'旅行期間',
+    trust_countries:'目的地',trust_langs:'言語',trust_ships:'世界中に配送',
+    problem_text:'完璧な旅行を計画しました。でも、空港から博物館へ向かう途中で、子どもたちは興味を失ってしまいます。3ヶ月後、一番覚えていることは？<strong>ホテルのプール。</strong>旅行は子どもたちにできる最高のギフトのひとつ。Tiny Planetが、本当に体験させます。',
+    how_label:'使い方',how_title:'お子様が探検家に。<br>あなたはヒーローパパ・ママに。',
+    how_sub:'家族旅行を何年も語り継ぐ冒険に変える、3つのフェーズ。',
+    step1_num:'ステップ 01',step1_title:'旅行前',step1_desc:'家でガイドを開きましょう。歴史、文化、動物、地元の料理について読みます。探検家プロフィールを作り、ミッション目標を選びましょう。ワクワクは荷造りの前から始まります。',
+    step2_num:'ステップ 02',step2_title:'旅行中',step2_desc:'毎日のチャレンジをクリアし、クイズに答え、地元の不思議を発見し、リアルタイムで記録しましょう。毎日が新しいレベルのアンロック。',
+    step3_num:'ステップ 03',step3_title:'旅行後',step3_desc:'最後のページに写真、イラスト、思い出を書き込みましょう。スタンプを集め、シールコレクションを完成させ、探検家ランクを発見。冒険は続きます。',
+    quote1:'"子どもたちは積極的で好奇心旺盛で、見ているものについて本当に話しかけてくれました。"',quote1_attr:'— Claire M.、ダブリン',
+    feat_label:'中身について',feat_title:'一冊のパスポート。<br>発見の世界が広がる。',feat_sub:'すべての旅行の前、中、後に好奇心旺盛な心を刺激するよう設計されています。',
+    feat1_title:'文化の深掘り',feat1_desc:'年齢に合った歴史、地理、豆知識。質問を生み出すために書かれています。',
+    feat2_title:'ゲームとチャレンジ',feat2_desc:'宝探し、観察タスク、地元のミッションで観光を冒険に変えます。',
+    feat3_title:'クイズとトリビア',feat3_desc:'子どもたちが学びたくなる楽しい質問 — そして知識を自慢できます。',
+    feat4_title:'日記ページ',feat4_desc:'ガイド付きプロンプトと自由スペースで、描いて、書いて、貼って。彼らの旅を彼ら自身の言葉で。',
+    feat5_title:'探検家レベル',feat5_desc:'ランクと達成スタンプを獲得。好奇心旺盛な心のためのゲーミフィケーションシステム。',
+    feat6_title:'シールコレクション',feat6_desc:'場所、食べ物、動物、乗り物を旅ごとに集めましょう。',
+    cat_label:'冒険パスポート',cat_title:'次の冒険を選ぼう',cat_search:'国を検索…',
+    filter_all:'すべて',filter_europe:'ヨーロッパ',filter_asia:'アジア',filter_americas:'アメリカ',filter_africa:'アフリカ',filter_oceania:'オセアニア',
+    test_label:'ご家族の声',test_title:'帰国後、子どもが変わった。',
+    t1:'"娘はどこへでも持っていきました。私たちに物を指し示し、質問し、夕食中もページを書き続けていました。旅行全体で最高の€20の使い道でした。"',
+    t2:'"Tiny Planetで3回旅行しました。息子はもう一緒なしでは旅行したくないと言います。"',
+    t3:'"ダイナミクスが完全に変わりました。子どもたちは積極的で好奇心旺盛で、見ているものについて本当に話しかけてくれました。"',
+    about_label:'私たちについて',about_em:'あったらよかったと思ったもの。',
+    about_p1:'すべては家族旅行から始まりました。子どもたちは何週間も楽しみにしていました — でも、フライトと最初の博物館のどこかで、興奮が消えてしまいました。興味がないから退屈したのではありません。物語の中で役割を与えられなかったから退屈したのです。',
+    about_p2:'旅行は子どもの成長のためにできる最も力強いことのひとつです。共感、好奇心、驚きの感覚を育てます。でも、子どもたちが本当にそこにいる場合のみです。',
+    about_float:'すべての旅は物語。',about_cta:'冒険を始めよう',
+    val1_title:'消費より好奇心',val1_desc:'リストをチェックするだけでなく、質問する子どもたちを育てたい。',
+    val2_title:'お土産より思い出',val2_desc:'家に持ち帰れる最高のものは記憶です。',
+    val3_title:'すべての家族への冒険',val3_desc:'探索するために遠くに行く必要はありません。',
+    nl_label:'最新情報を受け取る',nl_title:'新しい目的地、限定割引、旅行のヒント',nl_sub:'すでに2,000以上の家族がTiny Planetと旅しています。',nl_email:'メールアドレス',nl_btn:'登録する',nl_note:'スパムなし。いつでも退会可能。',
+    cta_title:'次の旅の前に、<br>すべての家族に必要なギフト。',cta_sub:'どの目的地にも対応。世界中に配送。',cta_btn1:'すべてのパスポートを見る',cta_btn2:'使い方を見る',
+    footer_brand:'家族旅行を、子どもたちが一生忘れない冒険に変えます。',
+    footer_shop_h:'ショップ',footer_shop_1:'全パスポート',footer_shop_2:'シールパック',footer_shop_3:'ギフトカード',footer_shop_4:'セットパック',
+    footer_info_h:'情報',footer_info_1:'使い方',footer_info_2:'私たちについて',footer_info_3:'販売店向け',footer_info_4:'プレス',
+    footer_help_h:'サポート',footer_help_1:'よくある質問',footer_help_2:'配送',footer_help_3:'お問い合わせ',footer_help_4:'Instagram',
+    footer_tagline:'すべての旅は物語。その記憶を残そう。',
+    cart_title:'カート',cart_empty:'カートは空です',cart_total:'合計',cart_checkout:'購入する',
+  },
+  zh:{
+    nav_how:'如何使用',nav_books:'冒险护照',nav_about:'关于我们',nav_shop:'购买',nav_cart:'🛒 购物车 (0)',
+    hero_h1a:'通往全世界的护照。',hero_h1b:'一次一段冒险。',
+    hero_sub:'Tiny Planet冒险护照让家庭旅行变成游戏、故事和永久珍藏的记忆。',
+    hero_cta1:'浏览护照',hero_cta2:'了解如何使用',
+    from_price:'起',week_1_2:'1–2周',week_3_4:'3–4周以上',duration_label:'旅行时长',
+    trust_countries:'目的地',trust_langs:'语言',trust_ships:'全球配送',
+    problem_text:'你计划了完美的旅行。但在机场和博物馆之间的某个地方，孩子们失去了兴趣。三个月后，他们记得最清楚的是什么？<strong>酒店的游泳池。</strong>旅行是你能给孩子的最好礼物之一。Tiny Planet确保他们真正体验它。',
+    how_label:'如何使用',how_title:'孩子成为探险家。<br>你成为超级父母。',
+    how_sub:'三个阶段，将任何家庭旅行变成他们多年后仍在谈论的冒险。',
+    step1_num:'第一步',step1_title:'出发前',step1_desc:'在家打开护照。阅读当地的历史、文化、动物和美食。创建你的探险家档案并选择任务目标。兴奋感在打包行李前就已经开始了。',
+    step2_num:'第二步',step2_title:'旅途中',step2_desc:'完成每日挑战，回答测验，发现当地奇趣，实时记录每一个发现。每天都是一个新的关卡等待解锁。',
+    step3_num:'第三步',step3_title:'旅行后',step3_desc:'用照片、涂鸦和回忆填满最后几页。赢得印章，完成贴纸收藏，发现你的探险家等级。冒险还在继续。',
+    quote1:'"孩子们充满热情、充满好奇，真的在和我们聊他们看到的东西。"',quote1_attr:'— Claire M.，都柏林',
+    feat_label:'里面有什么',feat_title:'一本护照。<br>整个世界等待发现。',feat_sub:'一切都旨在让好奇心在每次旅行的前、中、后保持活跃。',
+    feat1_title:'文化深度探索',feat1_desc:'适合年龄的历史、地理和趣闻。旨在激发问题，而不是终结问题。',
+    feat2_title:'游戏与挑战',feat2_desc:'寻宝游戏、观察任务和当地任务，将观光变成冒险。',
+    feat3_title:'问答与趣味知识',feat3_desc:'有趣的问题让孩子们想要学习——并展示他们所知道的。',
+    feat4_title:'日记页面',feat4_desc:'引导提示和自由空间，用于绘画、写作和粘贴。用他们自己的语言记录旅行。',
+    feat5_title:'探险家等级',feat5_desc:'赢得等级和成就印章。为好奇心设计的游戏化系统。',
+    feat6_title:'贴纸收藏',feat6_desc:'在每次旅行中收集地点、食物、动物和交通工具。',
+    cat_label:'冒险护照',cat_title:'选择你的下一个冒险',cat_search:'搜索国家…',
+    filter_all:'全部',filter_europe:'欧洲',filter_asia:'亚洲',filter_americas:'美洲',filter_africa:'非洲',filter_oceania:'大洋洲',
+    test_label:'家长的评价',test_title:'他们回来后不一样了。',
+    t1:'"我女儿把它带到了任何地方。她向我们指出各种东西，提问题，在晚餐时填写页面。整个旅行最值得的€20。"',
+    t2:'"我们已经用Tiny Planet旅行了三次。我们的儿子说他不想没有它就旅行。"',
+    t3:'"这完全改变了动态。孩子们充满热情、充满好奇，真的在和我们聊他们看到的东西。"',
+    about_label:'关于我们',about_em:'我们希望它早点存在。',
+    about_p1:'一切都始于一次家庭旅行。孩子们期待了好几周——然后，在飞行和第一个博物馆之间的某个地方，兴奋消失了。他们不是因为不在乎而感到无聊。他们无聊是因为没有人给他们一个故事中的角色。',
+    about_p2:'旅行是你能为孩子的发展做的最有力的事情之一。它建立同理心、好奇心和惊奇感。但只有当孩子们真正投入其中时才有效。',
+    about_float:'每次旅行都是一个故事。',about_cta:'开始他们的冒险',
+    val1_title:'好奇心胜于消费',val1_desc:'我们希望孩子们提出问题，而不仅仅是打卡景点。',
+    val2_title:'故事胜于纪念品',val2_desc:'你能带回家的最好的东西是一段记忆。',
+    val3_title:'每个家庭的冒险',val3_desc:'你不需要走远才能探索。',
+    nl_label:'保持联系',nl_title:'新目的地、专属折扣和家庭旅行贴士',nl_sub:'已有2,000多个家庭在使用Tiny Planet探索世界。',nl_email:'您的电子邮件',nl_btn:'订阅',nl_note:'无垃圾邮件。随时取消订阅。',
+    cta_title:'每个家庭在下次旅行前<br>都需要的礼物。',cta_sub:'适用于任何目的地。全球配送。',cta_btn1:'查看所有护照',cta_btn2:'了解如何使用',
+    footer_brand:'将家庭旅行变成孩子们一生难忘的冒险。',
+    footer_shop_h:'商店',footer_shop_1:'所有护照',footer_shop_2:'贴纸包',footer_shop_3:'礼品卡',footer_shop_4:'组合套装',
+    footer_info_h:'信息',footer_info_1:'如何使用',footer_info_2:'关于我们',footer_info_3:'零售商',footer_info_4:'媒体资源',
+    footer_help_h:'帮助',footer_help_1:'常见问题',footer_help_2:'配送',footer_help_3:'联系我们',footer_help_4:'Instagram',
+    footer_tagline:'每次旅行都是一个故事，让他们铭记于心。',
+    cart_title:'购物车',cart_empty:'购物车是空的',cart_total:'总计',cart_checkout:'结账',
+  },
+};
+['it','nl','pt'].forEach(l => { T[l] = Object.assign({},T['en']); });
+T.it.nav_how='Come funziona'; T.it.nav_books='Passaporti d\'Avventura'; T.it.hero_h1a='Trasforma un viaggio in'; T.it.hero_h1b='un\'avventura'; T.it.hero_sub='I passaporti avventura Tiny Planet trasformano i viaggi in famiglia in un gioco, una storia e un ricordo da conservare per sempre.'; T.it.hero_cta1='Scopri i passaporti'; T.it.hero_cta2='Come funziona'; T.it.from_price='Da'; T.it.week_1_2='1–2 settimane'; T.it.week_3_4='3–4+ settimane'; T.it.duration_label='Durata del viaggio'; T.it.trust_countries='Destinazioni'; T.it.trust_langs='Lingue'; T.it.trust_ships='Spedizione mondiale'; T.it.problem_text='Avete pianificato il viaggio perfetto. Da qualche parte tra l\'aeroporto e il museo, i bambini perdono interesse. Tre mesi dopo? <strong>La piscina dell\'hotel.</strong> Tiny Planet si assicura che lo vivano davvero.'; T.it.how_label='Come funziona'; T.it.how_title='Tuo figlio diventa l\'esploratore.<br>Tu diventi l\'eroe.'; T.it.how_sub='Tre fasi che trasformano qualsiasi viaggio in un\'avventura di cui parleranno per anni.'; T.it.step1_num='Fase 01'; T.it.step1_title='Prima del viaggio'; T.it.step1_desc='Aprite la guida a casa. Leggete storia, cultura, animali e cibo locale. Create il profilo Esploratore e scegliete gli obiettivi.'; T.it.step2_num='Fase 02'; T.it.step2_title='Durante il viaggio'; T.it.step2_desc='Completate sfide quotidiane, rispondete a quiz e annotate ogni scoperta in tempo reale.'; T.it.step3_num='Fase 03'; T.it.step3_title='Dopo il viaggio'; T.it.step3_desc='Riempite le ultime pagine con foto, disegni e ricordi. Guadagnate timbri e scoprite il vostro rango.'; T.it.feat_label='Cosa c\'\u00e8 dentro'; T.it.feat_title='Un passaporto.<br>Un intero mondo da scoprire.'; T.it.feat_sub='Tutto progettato per menti curiose — prima, durante e dopo ogni viaggio.'; T.it.feat1_title='Immersioni culturali'; T.it.feat1_desc='Storia, geografia e curiosit\u00e0 adatte all\'et\u00e0.'; T.it.feat2_title='Giochi e sfide'; T.it.feat2_desc='Cacce al tesoro e missioni locali che trasformano il turismo in avventura.'; T.it.feat3_title='Quiz e trivia'; T.it.feat3_desc='Domande divertenti che fanno venire voglia di imparare.'; T.it.feat4_title='Pagine di diario'; T.it.feat4_desc='Suggerimenti guidati e spazio libero per disegnare, scrivere e incollare.'; T.it.feat5_title='Livelli Esploratore'; T.it.feat5_desc='Guadagna ranghi e timbri di successo.'; T.it.feat6_title='Collezione di adesivi'; T.it.feat6_desc='Luoghi, cibi, animali e trasporti da collezionare in ogni viaggio.'; T.it.cat_label='Passaporti d\'Avventura'; T.it.cat_title='Scegli la tua prossima avventura'; T.it.cat_search='Cerca paese\u2026'; T.it.filter_all='Tutti'; T.it.filter_europe='Europa'; T.it.filter_asia='Asia'; T.it.filter_americas='Americhe'; T.it.filter_africa='Africa'; T.it.filter_oceania='Oceania'; T.it.test_label='Cosa dicono le famiglie'; T.it.test_title='Sono tornati diversi.'; T.it.t1='"Mia figlia lo portava ovunque. I migliori \u20ac20 di tutto il viaggio."'; T.it.t2='"Abbiamo fatto tre viaggi con Tiny Planet. Nostro figlio non vuole pi\u00f9 viaggiare senza di esso."'; T.it.t3='"Ha cambiato completamente le dinamiche. I bambini erano coinvolti e curiosi."'; T.it.about_label='La nostra storia'; T.it.about_em='che avremmo voluto esistesse.'; T.it.about_p1='Tutto \u00e8 iniziato con un viaggio in famiglia. L\'entusiasmo \u00e8 svanito da qualche parte tra il volo e il primo museo.'; T.it.about_p2='Viaggiare \u00e8 una delle cose pi\u00f9 potenti per lo sviluppo di un bambino.'; T.it.about_float='Ogni viaggio \u00e8 una storia.'; T.it.about_cta='Inizia la loro avventura'; T.it.val1_title='Curiosit\u00e0 sopra il consumo'; T.it.val1_desc='Vogliamo bambini che facciano domande, non che spuntino luoghi da una lista.'; T.it.val2_title='Storie sopra i souvenir'; T.it.val2_desc='La cosa migliore che potete portare a casa \u00e8 un ricordo.'; T.it.val3_title='Avventura per ogni famiglia'; T.it.val3_desc='Non \u00e8 necessario andare lontano per esplorare.'; T.it.nl_label='Rimani aggiornato'; T.it.nl_title='Nuove destinazioni, sconti esclusivi e consigli di viaggio'; T.it.nl_sub='Unisciti a pi\u00f9 di 2.000 famiglie che esplorano con Tiny Planet.'; T.it.nl_email='Il tuo indirizzo e-mail'; T.it.nl_btn='Iscriviti'; T.it.nl_note='Niente spam. Disdici quando vuoi.'; T.it.cta_title='Il regalo di cui ogni famiglia ha bisogno<br>prima del prossimo viaggio.'; T.it.cta_sub='Funziona per qualsiasi destinazione. Spedizione mondiale.'; T.it.cta_btn1='Vedi tutti i passaporti'; T.it.cta_btn2='Come funziona'; T.it.footer_brand='Trasformare i viaggi in avventure che i bambini ricorderanno tutta la vita.'; T.it.footer_shop_h='Negozio'; T.it.footer_shop_1='Tutti i passaporti'; T.it.footer_shop_2='Pack adesivi'; T.it.footer_shop_3='Carte regalo'; T.it.footer_shop_4='Pack combinati'; T.it.footer_info_h='Info'; T.it.footer_info_1='Come funziona'; T.it.footer_info_2='Chi siamo'; T.it.footer_info_3='Per i rivenditori'; T.it.footer_info_4='Stampa'; T.it.footer_help_h='Aiuto'; T.it.footer_help_1='FAQ'; T.it.footer_help_2='Spedizioni'; T.it.footer_help_3='Contattaci'; T.it.footer_help_4='Instagram'; T.it.footer_tagline='Ogni viaggio \u00e8 una storia. Assicurati che la ricordino.'; T.it.cart_title='Carrello'; T.it.cart_empty='Il carrello \u00e8 vuoto'; T.it.cart_total='Totale'; T.it.cart_checkout='Acquista';
+T.nl.nav_how='Hoe het werkt'; T.nl.nav_books='Avontuurpaspoorten'; T.nl.hero_h1a='Maak van een reis'; T.nl.hero_h1b='een avontuur'; T.nl.hero_sub='De avontuurpaspoorten van Tiny Planet maken van elke familiereis een spel, een verhaal en een herinnering.'; T.nl.hero_cta1='Bekijk de paspoorten'; T.nl.hero_cta2='Hoe het werkt'; T.nl.from_price='Vanaf'; T.nl.week_1_2='1–2 weken'; T.nl.week_3_4='3–4+ weken'; T.nl.duration_label='Reisduur'; T.nl.trust_countries='Bestemmingen'; T.nl.trust_langs='Talen'; T.nl.trust_ships='Wereldwijde verzending'; T.nl.problem_text='Je hebt de perfecte reis gepland. Maar ergens tussen de luchthaven en het museum verliezen de kinderen hun interesse. Drie maanden later? <strong>Het hotelzwembad.</strong> Tiny Planet zorgt ervoor dat ze het echt beleven.'; T.nl.how_label='Hoe het werkt'; T.nl.how_title='Jouw kind wordt de ontdekker.<br>Jij wordt de held.'; T.nl.how_sub='Drie fases die elke familiereis omtoveren tot een avontuur waar ze jaren over praten.'; T.nl.step1_num='Stap 01'; T.nl.step1_title='Voor de reis'; T.nl.step1_desc='Open de gids thuis. Lees over de geschiedenis, cultuur, dieren en lokaal eten. Maak je Ontdekker-profiel en kies je missiedoelen.'; T.nl.step2_num='Stap 02'; T.nl.step2_title='Tijdens de reis'; T.nl.step2_desc='Voltooi dagelijkse uitdagingen, beantwoord quizvragen en leg elke ontdekking in real time vast.'; T.nl.step3_num='Stap 03'; T.nl.step3_title='Na de reis'; T.nl.step3_desc="Vul de laatste pagina's met foto's, tekeningen en herinneringen. Verdien stempels en ontdek je Ontdekker-rang."; T.nl.feat_label='Wat er in zit'; T.nl.feat_title='Een paspoort.<br>Een hele wereld te ontdekken.'; T.nl.feat_sub='Alles ontworpen om nieuwsgierige geesten actief te houden — voor, tijdens en na elke reis.'; T.nl.feat1_title='Culturele verdiepingen'; T.nl.feat1_desc='Leeftijdsgeschikte geschiedenis, geografie en curiosa.'; T.nl.feat2_title='Spellen & uitdagingen'; T.nl.feat2_desc='Speurtochten en lokale missies die sightseeing omtoveren tot avontuur.'; T.nl.feat3_title='Quiz & trivia'; T.nl.feat3_desc='Leuke vragen die kinderen meer willen laten leren.'; T.nl.feat4_title="Dagboekpagina's"; T.nl.feat4_desc='Begeleide opdrachten en vrije ruimte om te tekenen, schrijven en plakken.'; T.nl.feat5_title='Ontdekker-niveaus'; T.nl.feat5_desc='Verdien rangen en prestatiestempels.'; T.nl.feat6_title='Stickercollectie'; T.nl.feat6_desc='Plaatsen, eten, dieren en vervoer te verzamelen op elke reis.'; T.nl.cat_label='Avontuurpaspoorten'; T.nl.cat_title='Kies je volgende avontuur'; T.nl.cat_search='Zoek land…'; T.nl.filter_all='Alle'; T.nl.filter_europe='Europa'; T.nl.filter_asia='Azië'; T.nl.filter_americas='Amerika'; T.nl.filter_africa='Afrika'; T.nl.filter_oceania='Oceanië'; T.nl.test_label='Wat families zeggen'; T.nl.test_title='Ze kwamen anders terug.'; T.nl.t1='"Onze dochter had het overal bij zich. De beste €20 van de hele reis."'; T.nl.t2='"We hebben drie reizen met Tiny Planet gemaakt. Onze zoon wil niet meer reizen zonder het."'; T.nl.t3='"Het veranderde de dynamiek volledig. De kinderen waren betrokken en nieuwsgierig."'; T.nl.about_label='Ons verhaal'; T.nl.about_em='die we hadden gewild dat bestond.'; T.nl.about_p1='Het begon op een familiereis. De opwinding verdween ergens tussen het vliegveld en het eerste museum.'; T.nl.about_p2='Reizen is een van de krachtigste dingen voor de ontwikkeling van een kind.'; T.nl.about_float='Elke reis is een verhaal.'; T.nl.about_cta='Start hun avontuur'; T.nl.val1_title='Nieuwsgierigheid boven consumptie'; T.nl.val1_desc='We willen kinderen die vragen stellen, niet alleen bezienswaardigheden afvinken.'; T.nl.val2_title='Verhalen boven souvenirs'; T.nl.val2_desc='Het beste wat je mee naar huis kunt nemen is een herinnering.'; T.nl.val3_title='Avontuur voor elk gezin'; T.nl.val3_desc='Je hoeft niet ver te gaan om te ontdekken.'; T.nl.nl_label='Blijf op de hoogte'; T.nl.nl_title='Nieuwe bestemmingen, exclusieve kortingen & reistips'; T.nl.nl_sub='Sluit je aan bij meer dan 2.000 gezinnen die al verkennen met Tiny Planet.'; T.nl.nl_email='Jouw e-mailadres'; T.nl.nl_btn='Abonneren'; T.nl.nl_note='Geen spam. Altijd opzegbaar.'; T.nl.cta_title='Het cadeau dat elk gezin nodig heeft<br>voor de volgende reis.'; T.nl.cta_sub='Werkt voor elke bestemming. Wereldwijde verzending.'; T.nl.cta_btn1='Alle paspoorten'; T.nl.cta_btn2='Hoe het werkt'; T.nl.footer_brand='Familievakanties omtoveren tot avonturen die kinderen hun hele leven onthouden.'; T.nl.footer_shop_h='Winkel'; T.nl.footer_shop_1='Alle paspoorten'; T.nl.footer_shop_2='Stickerpacks'; T.nl.footer_shop_3='Cadeaubonnen'; T.nl.footer_shop_4='Combipacks'; T.nl.footer_info_h='Info'; T.nl.footer_info_1='Hoe het werkt'; T.nl.footer_info_2='Over ons'; T.nl.footer_info_3='Voor retailers'; T.nl.footer_info_4='Pers'; T.nl.footer_help_h='Hulp'; T.nl.footer_help_1='FAQ'; T.nl.footer_help_2='Verzending'; T.nl.footer_help_3='Contact'; T.nl.footer_help_4='Instagram'; T.nl.footer_tagline='Elke reis is een verhaal. Zorg dat ze het onthouden.'; T.nl.cart_title='Winkelwagen'; T.nl.cart_empty='Je winkelwagen is leeg'; T.nl.cart_total='Totaal'; T.nl.cart_checkout='Afrekenen';
+T.pt.nav_how='Como funciona'; T.pt.nav_books='Passaportes de Aventura'; T.pt.hero_h1a='Transforma uma viagem em'; T.pt.hero_h1b='uma aventura'; T.pt.hero_sub='Os passaportes de aventura Tiny Planet transformam as viagens em família num jogo, uma história e uma memória que guardarão para sempre.'; T.pt.hero_cta1='Ver os passaportes'; T.pt.hero_cta2='Como funciona'; T.pt.from_price='A partir de'; T.pt.week_1_2='1–2 semanas'; T.pt.week_3_4='3–4+ semanas'; T.pt.duration_label='Duração da viagem'; T.pt.trust_countries='Destinos'; T.pt.trust_langs='Idiomas'; T.pt.trust_ships='Envio mundial'; T.pt.problem_text='Planeou a viagem perfeita. Mas algures entre o aeroporto e o museu, as crianças perdem o interesse. Três meses depois? <strong>Da piscina do hotel.</strong> O Tiny Planet garante que o vivam de verdade.'; T.pt.how_label='Como funciona'; T.pt.how_title='O seu filho torna-se o explorador.<br>Você torna-se o herói.'; T.pt.how_sub='Três fases que transformam qualquer viagem em família numa aventura de que falarão durante anos.'; T.pt.step1_num='Passo 01'; T.pt.step1_title='Antes da viagem'; T.pt.step1_desc='Abra o guia em casa. Leia sobre a história, cultura, animais e comida local. Crie o seu perfil de Explorador e escolha os seus objetivos.'; T.pt.step2_num='Passo 02'; T.pt.step2_title='Durante a viagem'; T.pt.step2_desc='Complete desafios diários, responda a quizzes e registe cada descoberta em tempo real.'; T.pt.step3_num='Passo 03'; T.pt.step3_title='Após a viagem'; T.pt.step3_desc='Preencha as últimas páginas com fotos, desenhos e memórias. Ganhe carimbos e descubra o seu nível de Explorador.'; T.pt.feat_label='O que há dentro'; T.pt.feat_title='Um passaporte.<br>Um mundo inteiro para descobrir.'; T.pt.feat_sub='Tudo concebido para mentes curiosas ativas — antes, durante e depois de cada viagem.'; T.pt.feat1_title='Mergulhos culturais'; T.pt.feat1_desc='História, geografia e curiosidades adequadas à idade.'; T.pt.feat2_title='Jogos e desafios'; T.pt.feat2_desc='Caças ao tesouro e missões locais que transformam o turismo em aventura.'; T.pt.feat3_title='Quizzes e trivia'; T.pt.feat3_desc='Perguntas divertidas que fazem as crianças quererem aprender.'; T.pt.feat4_title='Páginas de diário'; T.pt.feat4_desc='Sugestões guiadas e espaço livre para desenhar, escrever e colar.'; T.pt.feat5_title='Níveis de Explorador'; T.pt.feat5_desc='Ganha títulos e carimbos de conquista.'; T.pt.feat6_title='Coleção de autocolantes'; T.pt.feat6_desc='Lugares, comidas, animais e transportes para colecionar em cada viagem.'; T.pt.cat_label='Passaportes de Aventura'; T.pt.cat_title='Escolha a sua próxima aventura'; T.pt.cat_search='Pesquisar país…'; T.pt.filter_all='Todos'; T.pt.filter_europe='Europa'; T.pt.filter_asia='Ásia'; T.pt.filter_americas='Américas'; T.pt.filter_africa='África'; T.pt.filter_oceania='Oceânia'; T.pt.test_label='O que as famílias dizem'; T.pt.test_title='Voltaram para casa diferentes.'; T.pt.t1='"A minha filha levava-o para todo o lado. Os melhores €20 de toda a viagem."'; T.pt.t2='"Já fizemos três viagens com o Tiny Planet. O nosso filho não quer viajar sem ele."'; T.pt.t3='"Mudou completamente a dinâmica. As crianças estavam envolvidas e curiosas."'; T.pt.about_label='A nossa história'; T.pt.about_em='que gostaríamos que existisse.'; T.pt.about_p1='Tudo começou numa viagem em família. O entusiasmo desvaneceu-se algures entre o voo e o primeiro museu.'; T.pt.about_p2='Viajar é uma das coisas mais poderosas que pode fazer pelo desenvolvimento de uma criança.'; T.pt.about_float='Cada viagem é uma história.'; T.pt.about_cta='Comece a aventura deles'; T.pt.val1_title='Curiosidade acima do consumo'; T.pt.val1_desc='Queremos crianças que façam perguntas, não que apenas marquem lugares numa lista.'; T.pt.val2_title='Histórias acima das lembranças'; T.pt.val2_desc='A melhor coisa que pode trazer para casa é uma memória.'; T.pt.val3_title='Aventura para todas as famílias'; T.pt.val3_desc='Não precisa de ir longe para explorar.'; T.pt.nl_label='Mantenha-se informado'; T.pt.nl_title='Novos destinos, descontos exclusivos e dicas de viagem'; T.pt.nl_sub='Junte-se a mais de 2.000 famílias que já exploram com o Tiny Planet.'; T.pt.nl_email='O seu endereço de e-mail'; T.pt.nl_btn='Subscrever'; T.pt.nl_note='Sem spam. Cancele quando quiser.'; T.pt.cta_title='O presente que toda a família precisa<br>antes da próxima viagem.'; T.pt.cta_sub='Funciona para qualquer destino. Envio mundial.'; T.pt.cta_btn1='Ver todos os passaportes'; T.pt.cta_btn2='Como funciona'; T.pt.footer_brand='Transformar as viagens em família em aventuras que as crianças recordarão para toda a vida.'; T.pt.footer_shop_h='Loja'; T.pt.footer_shop_1='Todos os passaportes'; T.pt.footer_shop_2='Packs de autocolantes'; T.pt.footer_shop_3='Cartões oferta'; T.pt.footer_shop_4='Packs combinados'; T.pt.footer_info_h='Informação'; T.pt.footer_info_1='Como funciona'; T.pt.footer_info_2='Sobre nós'; T.pt.footer_info_3='Para retalhistas'; T.pt.footer_info_4='Imprensa'; T.pt.footer_help_h='Ajuda'; T.pt.footer_help_1='FAQ'; T.pt.footer_help_2='Envios'; T.pt.footer_help_3='Contacte-nos'; T.pt.footer_help_4='Instagram'; T.pt.footer_tagline='Cada viagem é uma história. Certifique-se de que a recordam.'; T.pt.cart_title='Carrinho'; T.pt.cart_empty='O seu carrinho está vazio'; T.pt.cart_total='Total'; T.pt.cart_checkout='Finalizar compra';
+
+const langNames = {en:'English',ca:'Català',es:'Español',fr:'Français',de:'Deutsch',it:'Italiano',nl:'Nederlands',pt:'Português',ja:'日本語',zh:'中文'};
+
+let currentLang = 'en';
+function setLang(code) {
+  currentLang = code;
+  const t = T[code] || T.en;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if(t[key] !== undefined) el.innerHTML = t[key];
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const key = el.getAttribute('data-i18n-placeholder');
+    if(t[key]) el.placeholder = t[key];
+  });
+  document.getElementById('langBtn').textContent = `${langNames[code] || code.toUpperCase()} ▾`;
+  document.getElementById('langDropdown').querySelectorAll('button').forEach(b => {
+    b.classList.toggle('active', b.getAttribute('onclick') === `setLang('${code}')`);
+  });
+  document.getElementById('langDropdown').classList.remove('open');
+  document.documentElement.lang = code;
+  filterBooks();
+}
+
+function detectLang() {
+  const nav = (navigator.language || navigator.userLanguage || 'en').slice(0,2).toLowerCase();
+  const supported = ['en','ca','es','fr','de','it','nl','pt','ja','zh'];
+  return supported.includes(nav) ? nav : 'en';
+}
+
+
+/* ── INTERSECTION OBSERVER ── */
+function initReveal() {
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+  }, {threshold: 0.12});
+  document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el => obs.observe(el));
+}
+
+/* ── SLIDER ── */
+let sliderIndex = 0;
+let sliderTimer = null;
+
+function sliderInit() {
+  const slides = document.querySelectorAll('.hero-slide');
+  const dotsEl = document.getElementById('sliderDots');
+  slides.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'slider-dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', 'Slide ' + (i + 1));
+    d.onclick = () => sliderGoTo(i);
+    dotsEl.appendChild(d);
+  });
+  sliderAutoPlay();
+  // Touch swipe
+  let tx = 0;
+  const el = document.getElementById('heroSlides');
+  el.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, {passive:true});
+  el.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - tx;
+    if (Math.abs(dx) > 40) sliderMove(dx < 0 ? 1 : -1);
+  }, {passive:true});
+  // Pause on hover
+  document.querySelector('.hero').addEventListener('mouseenter', () => clearInterval(sliderTimer));
+  document.querySelector('.hero').addEventListener('mouseleave', sliderAutoPlay);
+}
+
+function sliderGoTo(n) {
+  const slides = document.querySelectorAll('.hero-slide');
+  const dots = document.querySelectorAll('.slider-dot');
+  slides[sliderIndex].classList.remove('active');
+  dots[sliderIndex].classList.remove('active');
+  sliderIndex = (n + slides.length) % slides.length;
+  slides[sliderIndex].classList.add('active');
+  dots[sliderIndex].classList.add('active');
+}
+
+function sliderMove(dir) {
+  clearInterval(sliderTimer);
+  sliderGoTo(sliderIndex + dir);
+  sliderAutoPlay();
+}
+
+function sliderAutoPlay() {
+  clearInterval(sliderTimer);
+  sliderTimer = setInterval(() => sliderGoTo(sliderIndex + 1), 5000);
+}
+
+/* ── PRODUCT DETAIL PAGE ── */
+let pdpCurrentBook = null;
+let pdpSelectedVariant = {duration: null};
+
+function openPDP(id) {
+  const b = books.find(x => x.id === id);
+  if (!b) return;
+  pdpCurrentBook = b;
+  pdpSelectedVariant = {duration: b.duration.split(' & ')[0], price: b.price};
+
+  document.getElementById('pdpTitle').textContent = b.country + ' ' + b.emoji;
+  document.getElementById('pdpSub').textContent =
+    'Turn your trip to ' + b.country + ' into an unforgettable adventure. Packed with games, challenges, journaling pages, and a gamification system that makes exploring irresistible.';
+
+  // Gallery — placeholder emoji image for now
+  const main = document.getElementById('pdpMainImg');
+  main.src = ''; main.alt = b.country;
+  main.style.display = 'none';
+  // Show emoji placeholder if no real image
+  const galleryDiv = main.parentElement;
+  let emojiPlaceholder = galleryDiv.querySelector('.pdp-emoji-placeholder');
+  if (!emojiPlaceholder) {
+    emojiPlaceholder = document.createElement('div');
+    emojiPlaceholder.className = 'pdp-emoji-placeholder';
+    emojiPlaceholder.style.cssText = 'height:68%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:var(--cream);font-size:100px';
+    galleryDiv.insertBefore(emojiPlaceholder, main);
+  }
+  emojiPlaceholder.textContent = b.emoji;
+
+  // Thumbs — placeholder boxes
+  const thumbs = document.getElementById('pdpThumbs');
+  thumbs.innerHTML = [b.emoji, '✏️', '🎮', '🏅'].map((e,i) =>
+    `<div class="pdp-thumb placeholder" style="background:var(--cream);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:24px">${e}</div>`
+  ).join('');
+
+  // Duration variants — always 2 options
+  const t = T[currentLang] || T.en;
+  const variants = [
+    {label: t.week_1_2 || '1–2 weeks', price: 19.50},
+    {label: t.week_3_4 || '3–4+ weeks', price: 22.50},
+  ];
+  pdpSelectedVariant = {duration: variants[0].label, price: variants[0].price};
+  const varEl = document.getElementById('pdpVariants');
+  varEl.innerHTML = `<div class="pdp-variant-label">${t.duration_label||'Trip length'}</div><div class="pdp-variant-row">${variants.map((v,i) =>
+    `<button class="pdp-variant-btn${i===0?' active':''}" onclick="pdpSelectVariant(this,'${v.label}',${v.price})">${v.label} · €${v.price.toFixed(2)}</button>`
+  ).join('')}</div>`;
+
+  document.getElementById('pdpPrice').textContent = '€' + pdpSelectedVariant.price.toFixed(2);
+  document.getElementById('pdpAddBtn').textContent = 'Add to Cart — €' + pdpSelectedVariant.price.toFixed(2);
+
+  document.getElementById('pdpPage').classList.add('open');
+  document.getElementById('pdpClose').classList.add('visible');
+  document.body.style.overflow = 'hidden';
+}
+
+function pdpSelectVariant(btn, duration, price) {
+  document.querySelectorAll('.pdp-variant-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  pdpSelectedVariant = {duration, price};
+  document.getElementById('pdpPrice').textContent = '€' + Number(price).toFixed(2);
+  document.getElementById('pdpAddBtn').textContent = 'Add to Cart — €' + Number(price).toFixed(2);
+}
+
+function pdpAddToCart() {
+  if (!pdpCurrentBook) return;
+  addToCart(pdpCurrentBook.id, pdpSelectedVariant.price);
+  closePDP();
+}
+
+function closePDP() {
+  document.getElementById('pdpPage').classList.remove('open');
+  document.getElementById('pdpClose').classList.remove('visible');
+  document.body.style.overflow = '';
+}
+
+/* ── INIT ── */
+document.addEventListener('DOMContentLoaded', () => {
+  sliderInit();
+  renderBooks(books);
+  initReveal();
+  setLang(detectLang());
+});
+</script>
+</body>
+</html>
