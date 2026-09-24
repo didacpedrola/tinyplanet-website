@@ -16,7 +16,7 @@ backend:
   branch: main
 
 # Where uploaded images (if you ever add any through the CMS) get stored.
-media_folder: "Website/images/uploads"
+media_folder: "images/uploads"
 public_folder: "/images/uploads"
 
 # Show a "these changes are live once saved" style workflow instead of
@@ -31,7 +31,7 @@ collections:
     files:
       - name: "en"
         label: "🇬🇧 English"
-        file: "Website/i18n/en.json"
+        file: "i18n/en.json"
         fields: &translation_fields
           # — Navigation —
           - { label: "Nav: How it works", name: "nav_how", widget: "string" }
@@ -164,45 +164,45 @@ collections:
 
       - name: "ca"
         label: "🇦🇩 Català"
-        file: "Website/i18n/ca.json"
+        file: "i18n/ca.json"
         fields: *translation_fields
 
       - name: "es"
         label: "🇪🇸 Español"
-        file: "Website/i18n/es.json"
+        file: "i18n/es.json"
         fields: *translation_fields
 
       - name: "fr"
         label: "🇫🇷 Français"
-        file: "Website/i18n/fr.json"
+        file: "i18n/fr.json"
         fields: *translation_fields
 
       - name: "de"
         label: "🇩🇪 Deutsch"
-        file: "Website/i18n/de.json"
+        file: "i18n/de.json"
         fields: *translation_fields
 
       - name: "it"
         label: "🇮🇹 Italiano"
-        file: "Website/i18n/it.json"
+        file: "i18n/it.json"
         fields: *translation_fields
 
       - name: "nl"
         label: "🇳🇱 Nederlands"
-        file: "Website/i18n/nl.json"
+        file: "i18n/nl.json"
         fields: *translation_fields
 
       - name: "pt"
         label: "🇵🇹 Português"
-        file: "Website/i18n/pt.json"
+        file: "i18n/pt.json"
         fields: *translation_fields
 
       - name: "ja"
         label: "🇯🇵 日本語"
-        file: "Website/i18n/ja.json"
+        file: "i18n/ja.json"
         fields: *translation_fields
 
       - name: "zh"
         label: "🇨🇳 中文"
-        file: "Website/i18n/zh.json"
+        file: "i18n/zh.json"
         fields: *translation_fields
