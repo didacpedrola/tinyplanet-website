@@ -42,7 +42,6 @@ collections:
 
           - { label: "Hero headline — line 1", name: "hero_h1a", widget: "string" }
           - { label: "Hero headline — line 2 (highlighted)", name: "hero_h1b", widget: "string" }
-          - { label: "Hero subheading", name: "hero_sub", widget: "text" }
           - { label: "Hero button 1", name: "hero_cta1", widget: "string" }
           - { label: "Hero button 2", name: "hero_cta2", widget: "string" }
           - { label: "\"From\" (price prefix)", name: "from_price", widget: "string" }
@@ -54,7 +53,7 @@ collections:
           - { label: "Trust stat label: Ships worldwide", name: "trust_ships", widget: "string" }
 
           # — Problem band —
-          - { label: "Problem paragraph (HTML allowed, e.g. <strong>)", name: "problem_text", widget: "text" }
+          - { label: "Problem paragraph", name: "problem_text", widget: "text" }
 
           # — How it works —
           - { label: "\"How it works\" eyebrow label", name: "how_label", widget: "string" }
