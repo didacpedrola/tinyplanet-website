@@ -26,6 +26,20 @@ publish_mode: simple
 locale: en
 
 collections:
+  - name: "slider"
+    label: "🖼️ Hero Slider (imatges)"
+    files:
+      - name: "slider"
+        label: "Imatges del slider"
+        file: "i18n/slider.json"
+        fields:
+          - name: "slides"
+            label: "Slides"
+            widget: "list"
+            fields:
+              - { label: "Imatge", name: "src", widget: "image", media_folder: "/images", public_folder: "images" }
+              - { label: "Descripció (alt)", name: "alt", widget: "string", default: "Family adventure travel" }
+
   - name: "translations"
     label: "Website Text (all languages)"
     files:
