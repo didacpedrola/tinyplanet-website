@@ -65,8 +65,13 @@ collections:
           - { label: "Trust stat label: Languages", name: "trust_langs", widget: "string" }
           - { label: "Trust stat label: Ships worldwide", name: "trust_ships", widget: "string" }
 
-          # — Problem band —
-          - { label: "Problem paragraph", name: "problem_text", widget: "text" }
+          # — Product intro —
+          - { label: "Intro: Titular (HTML permès)", name: "intro_title", widget: "text" }
+          - { label: "Intro: Pill 1", name: "intro_pill1", widget: "string" }
+          - { label: "Intro: Pill 2", name: "intro_pill2", widget: "string" }
+          - { label: "Intro: Pill 3", name: "intro_pill3", widget: "string" }
+          - { label: "Intro: Pill 4", name: "intro_pill4", widget: "string" }
+          - { label: "Intro: Pill 5", name: "intro_pill5", widget: "string" }
 
           # — How it works —
           - { label: "\"How it works\" eyebrow label", name: "how_label", widget: "string" }
@@ -84,7 +89,6 @@ collections:
 
           # — Photo-break quote —
           - { label: "Quote text", name: "quote1", widget: "text" }
-          - { label: "Quote attribution", name: "quote1_attr", widget: "string" }
 
           # — Features —
           - { label: "\"What's inside\" eyebrow label", name: "feat_label", widget: "string" }

@@ -139,11 +139,20 @@ a{color:inherit;text-decoration:none}
 .hero-slide.active .slide-caption{opacity:1}
 
 /* ─────────────────────────────
-   PROBLEM BAND
+   PRODUCT INTRO
 ───────────────────────────── */
-.problem{background:var(--cream);padding:72px 80px;text-align:center}
-.problem p{max-width:700px;margin:0 auto;font-size:21px;line-height:1.7;font-weight:500;color:var(--navy)}
-.problem p strong{color:var(--teal)}
+.product-intro{background:var(--cream);padding:80px 80px}
+.product-intro-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.product-intro-img{width:100%;max-width:480px;border-radius:var(--r-lg);display:block}
+.product-intro-text h2{font-size:clamp(26px,3.5vw,44px);font-weight:800;color:var(--navy);line-height:1.15;margin-bottom:20px}
+.product-intro-text h2 em{font-style:normal;color:var(--teal)}
+.product-intro-pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.product-intro-pill{font-size:13px;font-weight:700;padding:7px 16px;border-radius:100px;background:#fff;color:var(--navy);border:1.5px solid rgba(0,32,96,.12)}
+@media(max-width:768px){
+  .product-intro-inner{grid-template-columns:1fr;gap:32px}
+  .product-intro{padding:60px 28px}
+  .product-intro-img{max-width:100%}
+}
 
 /* ─────────────────────────────
    HOW IT WORKS
@@ -385,7 +394,7 @@ footer{background:var(--navy-deep);padding:64px 80px 40px}
   .hero-actions{gap:8px}
   .hero-actions .btn{flex:1;padding:10px 6px;font-size:clamp(10px,3.4vw,13px);justify-content:center;white-space:nowrap;text-align:center}
   .hero-content{padding:0 28px}
-  .problem,.how,.features,.catalogue,.photo-grid-section,.testimonials,.about,.newsletter,.cta-band{padding:60px 28px}
+  .product-intro,.how,.features,.catalogue,.about,.newsletter,.cta-band{padding:60px 28px}
   .steps{grid-template-columns:1fr}
   .features-grid{grid-template-columns:1fr 1fr}
   .passports-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}
@@ -554,9 +563,21 @@ footer{background:var(--navy-deep);padding:64px 80px 40px}
 
 </section>
 
-<!-- ─── PROBLEM BAND ─── -->
-<section class="problem">
-  <p class="reveal" data-i18n="problem_text">Tiny Planet adventure passports turn family travel into a game, a story, and a memory your kids will keep forever.</p>
+<!-- ─── PRODUCT INTRO ─── -->
+<section class="product-intro">
+  <div class="product-intro-inner">
+    <img class="product-intro-img reveal-left" src="images/Portades2.png" alt="Tiny Planet Adventure Passports">
+    <div class="product-intro-text reveal-right">
+      <h2 data-i18n="intro_title">The travel guide, journal &amp; sticker book that makes kids the <em>star</em> of every family adventure.</h2>
+      <div class="product-intro-pills">
+        <span class="product-intro-pill" data-i18n="intro_pill1">✏️ Guided journal</span>
+        <span class="product-intro-pill" data-i18n="intro_pill2">🎮 Games &amp; challenges</span>
+        <span class="product-intro-pill" data-i18n="intro_pill3">🎨 Sticker collection</span>
+        <span class="product-intro-pill" data-i18n="intro_pill4">🏅 Explorer levels</span>
+        <span class="product-intro-pill" data-i18n="intro_pill5">🌍 20+ countries</span>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ─── HOW IT WORKS ─── -->
@@ -594,8 +615,7 @@ footer{background:var(--navy-deep);padding:64px 80px 40px}
     </div>
     <div class="photo-break-overlay"></div>
     <div class="photo-break-text reveal-left">
-      <blockquote data-i18n="quote1">"The kids were engaged, curious, and actually talking to us about what they were seeing."</blockquote>
-      <cite data-i18n="quote1_attr">— Claire M., Dublin</cite>
+      <blockquote data-i18n="quote1">Tiny Planet adventure passports turn family travel into a game, a story, and a memory your kids will keep forever.</blockquote>
     </div>
   </div>
 </div>
