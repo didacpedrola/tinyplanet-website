@@ -82,15 +82,17 @@ a{color:inherit;text-decoration:none}
 #nav.scrolled .lang-btn{color:var(--navy);border-color:rgba(0,32,96,.18)}
 .lang-btn:hover{border-color:rgba(255,255,255,.8)}
 #nav.scrolled .lang-btn:hover{border-color:var(--navy)}
-.hamburger span{display:block;width:24px;height:2.5px;background:#fff;border-radius:2px;transition:transform .3s,opacity .3s,background .4s}
-#nav.scrolled .hamburger span{background:var(--navy)}
 .lang-dropdown{position:absolute;top:calc(100% + 8px);right:0;background:#fff;border-radius:var(--r-sm);box-shadow:0 8px 40px rgba(0,32,96,.14);padding:8px;min-width:180px;display:none;z-index:300}
 .lang-dropdown.open{display:block}
 .lang-wrap{position:relative}
 .lang-dropdown button{display:block;width:100%;text-align:left;background:none;border:none;font-family:'Baloo 2',sans-serif;font-size:14px;font-weight:600;color:var(--navy);padding:9px 14px;border-radius:10px;cursor:pointer;transition:background .15s}
 .lang-dropdown button:hover,.lang-dropdown button.active{background:var(--cream)}
 .hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
-.hamburger span{display:block;width:24px;height:2.5px;background:var(--navy);border-radius:2px;transition:transform .3s,opacity .3s}
+.hamburger span{display:block;width:24px;height:2.5px;background:#fff;border-radius:2px;transition:transform .3s,opacity .3s,background .4s}
+#nav.scrolled .hamburger span{background:var(--navy)}
+.hamburger.open span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.open span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
 .mobile-menu{display:none;position:fixed;inset:0;background:#fff;z-index:190;flex-direction:column;align-items:center;justify-content:center;gap:28px}
 .mobile-menu.open{display:flex}
 .mobile-menu a{font-size:26px;font-weight:800;color:var(--navy)}
@@ -470,7 +472,6 @@ footer{background:var(--navy-deep);padding:64px 80px 40px}
 
 <!-- ─── MOBILE MENU ─── -->
 <div class="mobile-menu" id="mobileMenu">
-  <button onclick="closeMobileMenu()" style="position:absolute;top:24px;right:24px;background:none;border:none;font-size:24px;cursor:pointer;color:var(--navy)">✕</button>
   <a href="#how-it-works" onclick="closeMobileMenu()" data-i18n="nav_how">How it works</a>
   <a href="#catalogue" onclick="closeMobileMenu()" data-i18n="nav_books">Adventure Passports</a>
   <a href="#about" onclick="closeMobileMenu()" data-i18n="nav_about">Our Story</a>
@@ -507,7 +508,7 @@ footer{background:var(--navy-deep);padding:64px 80px 40px}
       </div>
     </div>
     <button class="btn btn-gold" style="padding:10px 22px;font-size:13px" onclick="openCart()" data-i18n="nav_cart">🛒 Cart (0)</button>
-    <button class="hamburger" onclick="openMobileMenu()" aria-label="Menu">
+    <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileMenu()" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
   </div>
@@ -916,8 +917,16 @@ window.addEventListener('scroll',()=>{
 });
 
 /* ── MOBILE MENU ── */
-function openMobileMenu(){document.getElementById('mobileMenu').classList.add('open')}
-function closeMobileMenu(){document.getElementById('mobileMenu').classList.remove('open')}
+function toggleMobileMenu(){
+  const menu = document.getElementById('mobileMenu');
+  const btn = document.getElementById('hamburgerBtn');
+  const isOpen = menu.classList.toggle('open');
+  btn.classList.toggle('open', isOpen);
+}
+function closeMobileMenu(){
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.getElementById('hamburgerBtn').classList.remove('open');
+}
 
 /* ── LANG DROPDOWN ── */
 function toggleLang(){document.getElementById('langDropdown').classList.toggle('open')}
