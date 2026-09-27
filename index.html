@@ -943,6 +943,14 @@ async function loadLang(code) {
 
 const langNames = {en:'English',ca:'Català',es:'Español',fr:'Français',de:'Deutsch',it:'Italiano',nl:'Nederlands',pt:'Português',ja:'日本語',zh:'中文'};
 
+function updateLangBtn(code) {
+  const isMobile = window.innerWidth < 768;
+  document.getElementById('langBtn').textContent = isMobile
+    ? `${code.toUpperCase()} ▾`
+    : `${langNames[code] || code.toUpperCase()} ▾`;
+}
+window.addEventListener('resize', () => updateLangBtn(currentLang));
+
 let currentLang = 'en';
 async function setLang(code) {
   currentLang = code;
@@ -955,7 +963,7 @@ async function setLang(code) {
     const key = el.getAttribute('data-i18n-placeholder');
     if(t[key]) el.placeholder = t[key];
   });
-  document.getElementById('langBtn').textContent = `${langNames[code] || code.toUpperCase()} ▾`;
+  updateLangBtn(code);
   document.getElementById('langDropdown').querySelectorAll('button').forEach(b => {
     b.classList.toggle('active', b.getAttribute('onclick') === `setLang('${code}')`);
   });
